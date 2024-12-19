@@ -1,0 +1,75 @@
+.hpos-settings-page {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.hpos-controls {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.hpos-label {
+    font-weight: bold;
+}
+.hpos-select {
+    padding: 8px;
+    border: 1px solid #ccd0d4;
+    border-radius: 5px;
+    width: 300px;
+}
+.hpos-scan-button {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+.hpos-results {
+    margin-top: 20px;
+}
+
+.hpos-results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.hpos-results th, 
+.hpos-results td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.hpos-results th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.hpos-results tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.hpos-results tr:hover {
+    background-color: #f1f1f1;
+}
+
+.hpos-results td {
+    word-break: break-word;
+}
+
+.hpos-results .button {
+    margin-top: 10px;
+}
+
+.wrap.hpos-settings-page hr {
+    margin: 24px 0;
+}
+
+#hpos-scanner-docs-btn,
+#hpos-scanner-support-btn {
+    float: right;
+    line-height: 26px;
+    margin-left: 12px;
+}
