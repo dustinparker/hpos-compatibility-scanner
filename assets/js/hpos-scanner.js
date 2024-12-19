@@ -2,27 +2,27 @@ jQuery(document).ready(function ($) {
     $('#hpos-scan-button').on('click', function () {
         const plugin = $('#hpos-plugin-selector').val();
         if (!plugin) {
-            alert('Please select a plugin to scan.');
+            alert(HPOSScanner.i18n.select_plugin);
             return;
         }
 
-        $('#hpos-scan-results').html('<p>Scanning...</p>');
+        $('#hpos-scan-results').html('<p>' + HPOSScanner.i18n.scanning + '</p>');
 
         $.post(HPOSScanner.ajax_url, {
             action: 'hpos_scan_plugin',
             plugin: plugin
         }, function (response) {
             if (response.success) {
-                let html = '<table><thead><tr><th>File</th><th>Term</th></tr></thead><tbody>';
+                let html = '<table><thead><tr><th>' + HPOSScanner.i18n.file + '</th><th>' + HPOSScanner.i18n.term + '</th></tr></thead><tbody>';
                 response.data.forEach(function (result) {
                     html += '<tr><td>' + result.file + '</td><td>' + result.term + '</td></tr>';
                 });
                 html += '</tbody></table>';
-                html += '<button id="download-csv" class="button">Download CSV</button>';
+                html += '<button id="download-csv" class="button">' + HPOSScanner.i18n.download_csv + '</button>';
                 $('#hpos-scan-results').html(html);
 
                 $('#download-csv').on('click', function () {
-                    let csvContent = 'data:text/csv;charset=utf-8,File,Term\n';
+                    let csvContent = 'data:text/csv;charset=utf-8,' + HPOSScanner.i18n.file + ',' + HPOSScanner.i18n.term + '\n';
                     response.data.forEach(function (result) {
                         csvContent += result.file + ',' + result.term + '\n';
                     });
@@ -35,10 +35,10 @@ jQuery(document).ready(function ($) {
                     document.body.removeChild(link);
                 });
             } else {
-                $('#hpos-scan-results').html('<p>Error: ' + response.data.message + '</p>');
+                $('#hpos-scan-results').html('<p>' + HPOSScanner.i18n.error + response.data.message + '</p>');
             }
         }).fail(function () {
-            $('#hpos-scan-results').html('<p>Error: Unable to complete the scan. Please check the server logs for details.</p>');
+            $('#hpos-scan-results').html('<p>' + HPOSScanner.i18n.unable_to_complete + '</p>');
         });
     });
 });

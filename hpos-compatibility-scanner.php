@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name: HPOS Compatibility Scanner
  * Description: Scans plugins for potential HPOS compatibility issues by checking for direct database access or inappropriate WordPress API usage.
@@ -31,11 +30,39 @@ $myUpdateChecker->setBranch( 'main' );
 // Current plugin version.
 define( 'HPOS_COMPATIBILITY_SCANNER_VERSION', '1.0.0' );
 
+/**
+ * Load plugin textdomain for translations.
+ * 
+ * @since  1.0.0
+ * @return void
+ */
+function hpos_load_textdomain() {
+    load_plugin_textdomain(
+        'hpos-compatibility-scanner',
+        false,
+        dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+    );
+}
+add_action( 'plugins_loaded', 'hpos_load_textdomain' );
+
+/**
+ * Class HPOS_Compatibility_Scanner
+ *
+ * This class handles the functionality for the HPOS Compatibility Scanner plugin.
+ * It registers the admin settings page, enqueues required assets, and processes
+ * AJAX requests to scan selected plugins for potential HPOS compatibility issues.
+ *
+ * @since 1.0.0
+ */
 class HPOS_Compatibility_Scanner {
 
     /**
      * Constructor.
-     * Adds hooks for admin menu, scripts, and AJAX handling.
+     *
+     * Initializes the plugin by setting up hooks for admin menu registration,
+     * script and style enqueuing, and AJAX request handling.
+     *
+     * @since 1.0.0
      */
     public function __construct() {
         add_action( 'admin_menu', [ $this, 'register_settings_page' ] );
@@ -55,7 +82,8 @@ class HPOS_Compatibility_Scanner {
             esc_html__( 'HPOS Scanner', 'hpos-compatibility-scanner' ),
             'manage_options',
             'hpos-scanner',
-            [ $this, 'render_settings_page' ]
+            [ $this, 'render_settings_page' ],
+            'dashicons-yes-alt'
         );
     }
 
@@ -74,7 +102,17 @@ class HPOS_Compatibility_Scanner {
 
         wp_enqueue_script( 'hpos-scanner', plugin_dir_url( __FILE__ ) . 'assets/js/hpos-scanner.js', [ 'jquery' ], HPOS_COMPATIBILITY_SCANNER_VERSION, true );
         wp_localize_script( 'hpos-scanner', 'HPOSScanner', [
-            'ajax_url' => admin_url( 'admin-ajax.php' )
+            'ajax_url' => admin_url( 'admin-ajax.php' ),
+            'i18n'     => [
+                'select_plugin'         => esc_html__( 'Please select a plugin to scan.', 'hpos-compatibility-scanner' ),
+                'scanning'              => esc_html__( 'Scanning...', 'hpos-compatibility-scanner' ),
+                'error'                 => esc_html__( 'Error: ', 'hpos-compatibility-scanner' ),
+                'unable_to_complete'    => esc_html__( 'Unable to complete the scan. Please check the server logs for details.', 'hpos-compatibility-scanner' ),
+                'no_issues_found'       => esc_html__( 'No issues found in the selected plugin.', 'hpos-compatibility-scanner' ),
+                'download_csv'          => esc_html__( 'Download CSV', 'hpos-compatibility-scanner' ),
+                'file'                  => esc_html__( 'File', 'hpos-compatibility-scanner' ),
+                'term'                  => esc_html__( 'Term', 'hpos-compatibility-scanner' )
+            ]
         ] );
 
         wp_enqueue_style( 'hpos-scanner-styles', plugin_dir_url( __FILE__ ) . 'assets/css/hpos-scanner.css', [], HPOS_COMPATIBILITY_SCANNER_VERSION );
@@ -122,7 +160,7 @@ class HPOS_Compatibility_Scanner {
             wp_send_json_error( [ 'message' => esc_html__( 'Unauthorized access.', 'hpos-compatibility-scanner' ) ] );
         }
 
-        $plugin = sanitize_text_field( wp_unslash( $_POST['plugin'] ) );
+        $plugin      = sanitize_text_field( wp_unslash( $_POST['plugin'] ) );
         $plugin_path = WP_PLUGIN_DIR . '/' . $plugin;
 
         if ( ! file_exists( $plugin_path ) ) {
@@ -174,6 +212,9 @@ class HPOS_Compatibility_Scanner {
             'shop_order'
         ];
 
+        // Filter the search terms.
+        $search_terms = apply_filters( 'hpos_compatibility_scanner_search_terms', $search_terms );
+
         $results = [];
 
         try {
@@ -185,9 +226,11 @@ class HPOS_Compatibility_Scanner {
         foreach ( $iterator as $file ) {
             if ( $file->isFile() && strtolower( pathinfo( $file, PATHINFO_EXTENSION ) ) === 'php' ) {
                 $contents = @file_get_contents( $file->getPathname() );
+                // Skip unreadable files.
                 if ( $contents === false ) {
-                    continue; // Skip unreadable files.
+                    continue;
                 }
+                // Loop through the search terms.
                 foreach ( $search_terms as $term ) {
                     if ( stripos( $contents, $term ) !== false ) {
                         $results[] = [
