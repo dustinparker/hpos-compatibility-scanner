@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: HPOS Compatibility Scanner\n"
-"POT-Creation-Date: 2024-12-19 15:21-0500\n"
-"PO-Revision-Date: 2024-12-19 15:21-0500\n"
+"POT-Creation-Date: 2025-02-05 23:39-0500\n"
+"PO-Revision-Date: 2025-02-05 23:39-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,81 +21,82 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: includes/plugin-update-checker/vendor\n"
+"X-Poedit-SearchPathExcluded-2: vendor\n"
 
-#: hpos-compatibility-scanner.php:81 hpos-compatibility-scanner.php:82
+#: hpos-compatibility-scanner.php:89 hpos-compatibility-scanner.php:90
 msgid "HPOS Scanner"
 msgstr ""
 
-#: hpos-compatibility-scanner.php:106
+#: hpos-compatibility-scanner.php:115
 msgid "Please select a plugin to scan."
 msgstr ""
 
-#: hpos-compatibility-scanner.php:107
+#: hpos-compatibility-scanner.php:116
 msgid "Scanning..."
 msgstr ""
 
-#: hpos-compatibility-scanner.php:108
+#: hpos-compatibility-scanner.php:117
 msgid "Error: "
 msgstr ""
 
-#: hpos-compatibility-scanner.php:109
+#: hpos-compatibility-scanner.php:118
 msgid "Unable to complete the scan. Please check the server logs for details."
 msgstr ""
 
-#: hpos-compatibility-scanner.php:110 hpos-compatibility-scanner.php:240
+#: hpos-compatibility-scanner.php:119 hpos-compatibility-scanner.php:254
 msgid "No issues found in the selected plugin."
 msgstr ""
 
-#: hpos-compatibility-scanner.php:111
+#: hpos-compatibility-scanner.php:120
 msgid "Download CSV"
 msgstr ""
 
-#: hpos-compatibility-scanner.php:112
+#: hpos-compatibility-scanner.php:121
 msgid "File"
 msgstr ""
 
-#: hpos-compatibility-scanner.php:113
+#: hpos-compatibility-scanner.php:122
 msgid "Term"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-#: hpos-compatibility-scanner.php:129
+#: hpos-compatibility-scanner.php:138
 msgid "HPOS Compatibility Scanner"
 msgstr ""
 
-#: hpos-compatibility-scanner.php:131
+#: hpos-compatibility-scanner.php:140
 msgid "Support"
 msgstr ""
 
-#: hpos-compatibility-scanner.php:134
+#: hpos-compatibility-scanner.php:143
 msgid "Documentation"
 msgstr ""
 
-#: hpos-compatibility-scanner.php:138
+#: hpos-compatibility-scanner.php:147
 msgid "Select a Plugin to Scan:"
 msgstr ""
 
-#: hpos-compatibility-scanner.php:140
+#: hpos-compatibility-scanner.php:149
 msgid "Select a Plugin"
 msgstr ""
 
-#: hpos-compatibility-scanner.php:145
+#: hpos-compatibility-scanner.php:154
 msgid "Scan Plugin"
 msgstr ""
 
-#: hpos-compatibility-scanner.php:159
+#: hpos-compatibility-scanner.php:168
 msgid "Unauthorized access."
 msgstr ""
 
-#: hpos-compatibility-scanner.php:166
+#: hpos-compatibility-scanner.php:175
 msgid "Plugin file does not exist."
 msgstr ""
 
-#: hpos-compatibility-scanner.php:174
+#: hpos-compatibility-scanner.php:183
 msgid "Plugin directory not found or inaccessible."
 msgstr ""
 
-#: hpos-compatibility-scanner.php:219
+#: hpos-compatibility-scanner.php:231
 msgid "Error reading plugin directory: "
 msgstr ""
 

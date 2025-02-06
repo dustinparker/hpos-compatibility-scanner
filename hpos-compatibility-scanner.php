@@ -64,7 +64,6 @@ add_action( 'plugins_loaded', 'hpos_load_textdomain' );
  * @since 1.0.0
  */
 class HPOS_Compatibility_Scanner {
-
     /**
      * Constructor.
      *
