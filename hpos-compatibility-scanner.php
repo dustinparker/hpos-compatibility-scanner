@@ -2,7 +2,7 @@
 /**
  * Plugin Name: HPOS Compatibility Scanner
  * Description: Scans plugins for potential HPOS compatibility issues by checking for direct database access or inappropriate WordPress API usage.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Robert DeVore
  * Author URI: https://robertdevore.com/
  * License: GPL-2.0+
@@ -28,7 +28,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 $myUpdateChecker->setBranch( 'main' );
 
 // Current plugin version.
-define( 'HPOS_COMPATIBILITY_SCANNER_VERSION', '1.0.0' );
+define( 'HPOS_COMPATIBILITY_SCANNER_VERSION', '1.0.1' );
 
 // Check if Composer's autoloader is already registered globally.
 if ( ! class_exists( 'RobertDevore\WPComCheck\WPComPluginHandler' ) ) {
