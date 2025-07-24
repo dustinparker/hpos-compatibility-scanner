@@ -1,5 +1,35 @@
 {
+    "name": "dpwd/hpos-compatibility-plugin",
+    "description": "Scans plugins for potential HPOS compatibility issues by checking for direct database access or inappropriate WordPress API usage.",
+    "license": "GPL-2.0+",
     "require": {
         "robertdevore/wpcom-check": "^1.0"
     }
 }
+
+        "php": ">=7.4",
+        "automattic/jetpack-autoloader": "^2.11",
+        "yahnis-elsts/plugin-update-checker": "^5.5"
+    "autoload": {
+        "psr-4": {
+            "DPWD\\HPOSCompatPlugin\\": "src/"
+        }
+    },
+    "archive": {
+        "exclude": [
+            "!/assets",
+            "!/languages",
+            "!/vendor",
+            "composer.json",
+            "composer.lock",
+            "package.json",
+            ".gitignore",
+            "README.md",
+            "version-bump.js"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "automattic/jetpack-autoloader": true,
+        }
+    },
