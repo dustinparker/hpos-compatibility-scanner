@@ -3,13 +3,19 @@
     "description": "Scans plugins for potential HPOS compatibility issues by checking for direct database access or inappropriate WordPress API usage.",
     "license": "GPL-2.0+",
     "require": {
-        "robertdevore/wpcom-check": "^1.0"
-    }
-}
-
         "php": ">=7.4",
         "automattic/jetpack-autoloader": "^2.11",
         "yahnis-elsts/plugin-update-checker": "^5.5"
+    },
+    "require-dev": {
+        "woocommerce/woocommerce-sniffs": "*",
+        "wp-coding-standards/wpcs": "*",
+        "dealerdirect/phpcodesniffer-composer-installer": "*",
+        "phpstan/phpstan": "^2",
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "phpstan/extension-installer": "^1.4",
+        "php-stubs/woocommerce-stubs": "^9.7"
+    },
     "autoload": {
         "psr-4": {
             "DPWD\\HPOSCompatPlugin\\": "src/"
@@ -31,5 +37,19 @@
     "config": {
         "allow-plugins": {
             "automattic/jetpack-autoloader": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
         }
     },
+    "scripts": {
+        "phpstan": [
+            "./vendor/bin/phpstan analyse --configuration=.phpstan/config.neon"
+        ],
+        "wpcs": [
+            "./vendor/bin/phpcs . --ignore=vendor,.git,assets,node_modules,.phpstan --standard=WooCommerce-Core,WordPress-Core,WordPress-Extra,WordPress-Docs  --report-full --report-summary --colors -s"
+        ],
+        "wpcs:fix": [
+            "./vendor/bin/phpcbf . --ignore=vendor,.git,assets,node_modules,.phpstan --standard=WooCommerce-Core,WordPress-Core,WordPress-Extra,WordPress-Docs  --report-full --report-summary --colors"
+        ]
+    }
+}
