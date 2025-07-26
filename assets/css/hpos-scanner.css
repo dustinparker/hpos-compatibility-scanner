@@ -28,6 +28,20 @@
     margin-top: 20px;
 }
 
+/* CSV Download container and separator info styles */
+.hpos-csv-download-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.hpos-csv-separator-info {
+    margin-left: 10px;
+    color: #666;
+    font-size: 13px;
+    font-style: italic;
+}
+
 .hpos-results table {
     width: 100%;
     border-collapse: collapse;

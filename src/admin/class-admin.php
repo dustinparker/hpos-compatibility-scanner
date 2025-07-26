@@ -57,7 +57,7 @@ class Admin {
 		wp_enqueue_script(
 			'hpos-scanner',
 			HPOS_COMPATIBILITY_SCANNER_PLUGIN_URL . '/assets/js/hpos-scanner.js',
-			array( 'jquery' ),
+			array(),
 			HPOS_COMPATIBILITY_SCANNER_VERSION,
 			true
 		);
@@ -77,6 +77,7 @@ class Admin {
 					'download_csv'        => esc_html__( 'Download CSV', 'hpos-compatibility-scanner' ),
 					'file'                => esc_html__( 'File', 'hpos-compatibility-scanner' ),
 					'term'                => esc_html__( 'Term', 'hpos-compatibility-scanner' ),
+					'description'         => esc_html__( 'Description', 'hpos-compatibility-scanner' ),
 					'line'                => esc_html__( 'Line', 'hpos-compatibility-scanner' ),
 					'code'                => esc_html__( 'Code', 'hpos-compatibility-scanner' ),
 					'snippet'             => esc_html__( 'Snippet', 'hpos-compatibility-scanner' ),
