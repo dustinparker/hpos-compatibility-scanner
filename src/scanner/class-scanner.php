@@ -7,6 +7,7 @@
 
 namespace DPWD\HPOSCompatPlugin\Scanner;
 
+use Exception;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -81,7 +82,7 @@ class Scanner {
 
 		try {
 			$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $plugin_path ) );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Error reading plugin directory: ', 'hpos-compatibility-scanner' ) . $e->getMessage() ) );
 		}
 
@@ -95,7 +96,7 @@ class Scanner {
 					continue;
 				}
 
-				// Read file line by line.
+				// Read the file line by line.
 				$lines = file( $file_path, FILE_IGNORE_NEW_LINES );
 				if ( false === $lines ) {
 					continue;
@@ -105,9 +106,36 @@ class Scanner {
 				foreach ( $lines as $line_number => $line ) {
 					++$line_number; // Line numbers start at 1, not 0.
 
+					// Skip if it's a comment line.
+					if ( preg_match( '/^\s*\/\//', $line ) || preg_match( '/^\s*\*/', $line ) ) {
+						continue;
+					}
+
 					// Check each search term.
 					foreach ( $search_terms as $term ) {
-						if ( stripos( $line, $term ) !== false ) {
+						$is_match         = false;
+						$term_display     = '';
+						$term_description = '';
+
+						// Handle both string terms and regex pattern arrays.
+						if ( is_array( $term ) ) {
+							// This is a regex pattern with context.
+							if ( preg_match( $term['pattern'], $line ) ) {
+								$is_match = true;
+								// Use type or a shorter identifier for term_display.
+								$term_display = isset( $term['type'] ) ? ucfirst( str_replace( '_', ' ', $term['type'] ) ) : 'Pattern match';
+								// Use the full description for term_description.
+								$term_description = $term['description'];
+							}
+						} elseif ( stripos( $line, $term ) !== false ) {
+							$is_match = true;
+							// Use the actual term for term_display.
+							$term_display = $term;
+							// Generate a more descriptive explanation for term_description.
+							$term_description = 'Found "' . $term . '" which may indicate direct database access or use of deprecated APIs.';
+						}
+
+						if ( $is_match ) {
 							// Check if this is a false positive by looking for safe patterns.
 							$is_false_positive = false;
 							foreach ( $safe_patterns as $safe_pattern ) {
@@ -122,12 +150,23 @@ class Scanner {
 								continue;
 							}
 
-							// Skip if it's in a comment.
-							if ( preg_match( '/^\s*\/\//', $line ) || preg_match( '/^\s*\*/', $line ) ) {
-								continue;
+							// For multi-line context analysis (if needed).
+							$context_before = '';
+							$context_after  = '';
+
+							// Get a few lines before for context.
+							$context_start = max( 0, $line_number - 5 );
+							if ( $context_start < $line_number - 1 ) {
+								$context_before = implode( "\n", array_slice( $lines, $context_start, $line_number - $context_start - 1 ) );
 							}
 
-							// Extract code snippet with context.
+							// Get a few lines after for context.
+							$context_end = min( count( $lines ) - 1, $line_number + 5 );
+							if ( $line_number < $context_end ) {
+								$context_after = implode( "\n", array_slice( $lines, $line_number, $context_end - $line_number ) );
+							}
+
+							// Extract the code snippet with context.
 							$start_line = max( 0, $line_number - $context_lines - 1 );
 							$end_line   = min( count( $lines ) - 1, $line_number + $context_lines - 1 );
 							$snippet    = array_slice( $lines, $start_line, $end_line - $start_line + 1 );
@@ -136,18 +175,24 @@ class Scanner {
 							$formatted_snippet = '';
 							$snippet_count     = count( $snippet );
 							for ( $i = 0; $i < $snippet_count; $i++ ) {
-								$current_line       = $start_line + $i + 1;
-								$line_marker        = ( $line_number === $current_line ) ? '>' : ' ';
+								$current_line = $start_line + $i + 1;
+								$line_marker  = ( $line_number === $current_line ) ? '>' : ' ';
+
 								$formatted_snippet .= sprintf( "%s %4d: %s\n", $line_marker, $current_line, htmlspecialchars( $snippet[ $i ] ) );
 							}
 
 							// Add to results.
 							$results[] = array(
-								'file'    => $relative_path,
-								'term'    => $term,
-								'line'    => $line_number,
-								'snippet' => trim( $formatted_snippet ),
-								'code'    => htmlspecialchars( $line ),
+								'file'        => $relative_path,
+								'term'        => $term_display,
+								'description' => $term_description,
+								'line'        => $line_number,
+								'snippet'     => trim( $formatted_snippet ),
+								'code'        => htmlspecialchars( $line ),
+								'context'     => array(
+									'before' => $context_before,
+									'after'  => $context_after,
+								),
 							);
 						}
 					}
@@ -177,10 +222,11 @@ class Scanner {
 	 * Checks if a plugin declares HPOS compatibility.
 	 *
 	 * @param string $plugin_path Path to the plugin directory.
+	 *
 	 * @return bool True if the plugin declares HPOS compatibility, false otherwise.
 	 * @since 1.0.2
 	 */
-	private function check_hpos_compatibility( $plugin_path ) {
+	private function check_hpos_compatibility( string $plugin_path ): bool {
 		if ( ! is_dir( $plugin_path ) || ! is_readable( $plugin_path ) ) {
 			return false;
 		}
@@ -233,7 +279,7 @@ class Scanner {
 					}
 				}
 			}
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			// If there's an error reading the directory, return false.
 			return false;
 		}
@@ -244,54 +290,151 @@ class Scanner {
 	/**
 	 * Get the search terms for scanning.
 	 *
-	 * @return array Array of search terms.
+	 * Each search term can be either:
+	 * 1. A simple string (for backward compatibility and simple cases)
+	 * 2. An array with 'pattern' (regex), 'type' (for categorization), and 'description' (for reporting)
+	 *
+	 * @return array Array of search terms and patterns.
 	 */
-	private function get_search_terms() {
+	private function get_search_terms(): array {
 		return array(
-			// SQL query patterns for posts table.
-			'wp_posts',
-			'wp_post',
-			'{$wpdb->posts}',
-			'{$wpdb->prefix}posts',
-			'$wpdb->posts',
-			'$wpdb->prefix . "posts"',
-			'$wpdb->prefix . \'posts\'',
-			'$wpdb->prefix}posts',
+			// --- General Order Post Type Identifiers ---
+			// More specific regex to match actual order post-type usage
+			array(
+				'pattern'     => '/[\'"]post_type[\'"]\\s*=>\\s*[\'"]shop_order[\'"]/',
+				'type'        => 'order_post_type',
+				'description' => 'Order post type in array',
+			),
+			array(
+				'pattern'     => '/[\'"]post_type[\'"]\\s*=\\s*[\'"]shop_order[\'"]/',
+				'type'        => 'order_post_type',
+				'description' => 'Order post type in query',
+			),
+			array(
+				'pattern'     => '/post_type\\s*=\\s*[\'"]shop_order[\'"]/',
+				'type'        => 'order_post_type',
+				'description' => 'Order post type in query string',
+			),
+			// Similar patterns for shop_order_refund.
+			array(
+				'pattern'     => '/[\'"]post_type[\'"]\\s*=>\\s*[\'"]shop_order_refund[\'"]/',
+				'type'        => 'order_post_type',
+				'description' => 'Order refund post type in array',
+			),
+			array(
+				'pattern'     => '/[\'"]post_type[\'"]\\s*=\\s*[\'"]shop_order_refund[\'"]/',
+				'type'        => 'order_post_type',
+				'description' => 'Order refund post type in query',
+			),
+			array(
+				'pattern'     => '/post_type\\s*=\\s*[\'"]shop_order_refund[\'"]/',
+				'type'        => 'order_post_type',
+				'description' => 'Order refund post type in query string',
+			),
 
-			// SQL query patterns for postmeta table.
-			'wp_postmeta',
-			'{$wpdb->postmeta}',
-			'{$wpdb->prefix}postmeta',
-			'$wpdb->postmeta',
-			'$wpdb->prefix . "postmeta"',
-			'$wpdb->prefix . \'postmeta\'',
-			'$wpdb->prefix}postmeta',
+			// --- Core Table References ---
+			// Direct table references with context
+			array(
+				'pattern'     => '/\\$wpdb->(?:prefix\\s*\\.\\s*)?[\'"]?posts[\'"]?/',
+				'type'        => 'db_table',
+				'description' => 'Direct reference to posts table',
+			),
+			array(
+				'pattern'     => '/\\$wpdb->(?:prefix\\s*\\.\\s*)?[\'"]?postmeta[\'"]?/',
+				'type'        => 'db_table',
+				'description' => 'Direct reference to postmeta table',
+			),
+			array(
+				'pattern'     => '/(?:FROM|JOIN|UPDATE|INTO)\\s+(?:\\w+_)?posts\\b/',
+				'type'        => 'db_query',
+				'description' => 'SQL query referencing posts table',
+			),
+			array(
+				'pattern'     => '/(?:FROM|JOIN|UPDATE|INTO)\\s+(?:\\w+_)?postmeta\\b/',
+				'type'        => 'db_query',
+				'description' => 'SQL query referencing postmeta table',
+			),
+			// Direct table names (less reliable but still needed).
+			array(
+				'pattern'     => '/\\bwp_posts\\b/',
+				'type'        => 'db_table',
+				'description' => 'Direct wp_posts table name',
+			),
+			array(
+				'pattern'     => '/\\bwp_postmeta\\b/',
+				'type'        => 'db_table',
+				'description' => 'Direct wp_postmeta table name',
+			),
 
-			// Common table aliases in queries.
-			'AS p ON',
-			'AS pm ON',
-			'JOIN wp_posts',
-			'JOIN wp_postmeta',
-			'FROM wp_posts',
-			'FROM wp_postmeta',
+			// --- Legacy Post Access ---
+			// WordPress post functions with context
+			array(
+				'pattern'     => '/get_post\\s*\\(\\s*\\$(?:order|order_id)/',
+				'type'        => 'wp_function',
+				'description' => 'get_post with order variable',
+			),
+			array(
+				'pattern'     => '/get_post_meta\\s*\\(\\s*\\$(?:order|order_id)/',
+				'type'        => 'wp_function',
+				'description' => 'get_post_meta with order variable',
+			),
+			array(
+				'pattern'     => '/update_post_meta\\s*\\(\\s*\\$(?:order|order_id)/',
+				'type'        => 'wp_function',
+				'description' => 'update_post_meta with order variable',
+			),
+			array(
+				'pattern'     => '/delete_post_meta\\s*\\(\\s*\\$(?:order|order_id)/',
+				'type'        => 'wp_function',
+				'description' => 'delete_post_meta with order variable',
+			),
+			// WP_Query with order context.
+			array(
+				'pattern'     => '/new\\s+WP_Query\\s*\\(\\s*\\{?[^}]*[\'"]post_type[\'"]\\s*=>\\s*[\'"]shop_order[\'"]/',
+				'type'        => 'wp_class',
+				'description' => 'WP_Query with shop_order post type',
+			),
+			array(
+				'pattern'     => '/new\\s+WP_Query\\s*\\(\\s*\\{?[^}]*[\'"]post_type[\'"]\\s*=>\\s*[\'"]shop_order_refund[\'"]/',
+				'type'        => 'wp_class',
+				'description' => 'WP_Query with shop_order_refund post type',
+			),
+			// get_posts with order context.
+			array(
+				'pattern'     => '/get_posts\\s*\\(\\s*\\{?[^}]*[\'"]post_type[\'"]\\s*=>\\s*[\'"]shop_order[\'"]/',
+				'type'        => 'wp_function',
+				'description' => 'get_posts with shop_order post type',
+			),
+			array(
+				'pattern'     => '/get_posts\\s*\\(\\s*\\{?[^}]*[\'"]post_type[\'"]\\s*=>\\s*[\'"]shop_order_refund[\'"]/',
+				'type'        => 'wp_function',
+				'description' => 'get_posts with shop_order_refund post type',
+			),
 
-			// Common SQL operations on these tables.
-			'SELECT * FROM wp_posts',
-			'SELECT * FROM wp_postmeta',
-			'INSERT INTO wp_posts',
-			'INSERT INTO wp_postmeta',
-			'UPDATE wp_posts',
-			'UPDATE wp_postmeta',
-			'DELETE FROM wp_posts',
-			'DELETE FROM wp_postmeta',
+			// --- Legacy WooCommerce Order APIs ---
+			// WC_Order instantiation
+			array(
+				'pattern'     => '/new\\s+WC_Order\\s*\\(/',
+				'type'        => 'wc_class',
+				'description' => 'WC_Order instantiation',
+			),
+			array(
+				'pattern'     => '/new\\s+WC_Order_Query\\s*\\(/',
+				'type'        => 'wc_class',
+				'description' => 'WC_Order_Query instantiation',
+			),
+			// Other WooCommerce specific patterns.
+			'WC()->order_factory',
+			'woocommerce_order_data_store_cpt',
+			'woocommerce_order_get_items',
+			'woocommerce_before_order_object_save',
 
-			// WooCommerce specific post types in SQL.
-			'post_type = \'shop_order\'',
-			'post_type = "shop_order"',
-			'post_type=\'shop_order\'',
-			'post_type="shop_order"',
-			'post_type IN (\'shop_order\'',
-			'post_type IN ("shop_order"',
+			// --- Legacy REST API Endpoints ---
+			// These are specific enough to keep as strings
+			'/wc/v1/orders',
+			'/wc/v2/orders',
+			'/wc-api/v3/orders',
+			'wc-api=wc-orders',
 		);
 	}
 
@@ -300,15 +443,20 @@ class Scanner {
 	 *
 	 * @return array Array of safe patterns.
 	 */
-	private function get_safe_patterns() {
+	private function get_safe_patterns(): array {
 		return array(
-			// WooCommerce HPOS compatibility function calls.
+			// --- HPOS-Compatible WooCommerce Functions ---
 			'wc_get_order',
 			'wc_update_order',
 			'wc_delete_order',
 			'wc_get_orders',
+			'wc_get_order_id_by_order_key',
+			'wc_get_order_types',
+			'wc_get_order_statuses',
+			'WC_Order_Data_Store_CPT',
+			'WC_Order_Data_Store_Custom_Table',
 
-			// Common exclusions in comments and documentation.
+			// --- Comments / Docblocks / Documentation ---
 			'// wp_posts',
 			'// wp_postmeta',
 			'/* wp_posts',
@@ -330,7 +478,7 @@ class Scanner {
 			'Example query:',
 			'example query:',
 
-			// Function and class definitions (not actual queries).
+			// --- Language / Structure Keywords ---
 			'function',
 			'class',
 			'interface',
@@ -339,34 +487,21 @@ class Scanner {
 			'extends',
 			'implements',
 
-			// Safe usage patterns - non-order related queries.
+			// --- Other CPTs (safe) ---
 			'post_type = \'product\'',
 			'post_type = "product"',
-			'post_type=\'product\'',
-			'post_type="product"',
 			'post_type = \'page\'',
 			'post_type = "page"',
-			'post_type=\'page\'',
-			'post_type="page"',
 			'post_type = \'post\'',
 			'post_type = "post"',
-			'post_type=\'post\'',
-			'post_type="post"',
 
-			// Schema definitions and migrations.
+			// --- Safe DB schema / install logic ---
 			'CREATE TABLE',
 			'ALTER TABLE',
 			'DROP TABLE',
 			'dbDelta',
 
-			// WooCommerce HPOS compatible methods.
-			'wc_get_order_id_by_order_key',
-			'wc_get_order_types',
-			'wc_get_order_statuses',
-			'WC_Order_Data_Store_CPT',
-			'WC_Order_Data_Store_Custom_Table',
-
-			// Testing and debugging code.
+			// --- Debug/Test Code ---
 			'test_',
 			'debug_',
 			'is_admin()',
