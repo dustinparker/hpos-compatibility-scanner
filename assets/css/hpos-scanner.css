@@ -65,7 +65,7 @@
 
 /* Column widths */
 .hpos-results-table th:nth-child(1) {
-    width: 30%;
+    width: 20%;
 }
 
 .hpos-results-table th:nth-child(2) {
@@ -73,11 +73,15 @@
 }
 
 .hpos-results-table th:nth-child(3) {
-    width: 10%;
+    width: 20%;
 }
 
 .hpos-results-table th:nth-child(4) {
-    width: 45%;
+    width: 10%;
+}
+
+.hpos-results-table th:nth-child(5) {
+    width: 35%;
 }
 
 .hpos-results tr.hpos-result-row {
