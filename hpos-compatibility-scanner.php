@@ -17,7 +17,7 @@
 namespace DPWD\HPOSCompatPlugin;
 
 // Exit if accessed directly.
-use YahnisElsts\PluginUpdateChecker\v5p5\PucFactory;
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 if ( ! defined( 'WPINC' ) ) {
 	die;
