@@ -2,7 +2,7 @@
 /**
  * Admin class for the HPOS Compatibility Scanner plugin.
  *
- * @package DPWD\HPOSCompatPlugin\Admin
+ * @package DPWD\HPOSCompatPlugin
  */
 
 namespace DPWD\HPOSCompatPlugin\Admin;

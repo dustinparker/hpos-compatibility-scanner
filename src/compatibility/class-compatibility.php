@@ -2,7 +2,7 @@
 /**
  * Compatibility class for the HPOS Compatibility Scanner plugin.
  *
- * @package DPWD\HPOSCompatPlugin\Compatibility
+ * @package DPWD\HPOSCompatPlugin
  */
 
 namespace DPWD\HPOSCompatPlugin\Compatibility;
