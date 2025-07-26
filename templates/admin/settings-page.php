@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 <div class="wrap hpos-settings-page">
 	<h1>
 		<?php esc_html_e( 'HPOS Compatibility Scanner', 'hpos-compatibility-scanner' ); ?>
-		<a id="hpos-scanner-support-btn" href="https://dustinparkerwebdev.com/" target="_blank" class="button button-alt" style="margin-left: 10px;">
+		<a id="hpos-scanner-support-btn" href="https://github.com/dustinparker/hpos-compatibility-scanner/issues" target="_blank" class="button button-alt" style="margin-left: 10px;">
 			<span class="dashicons dashicons-format-chat" style="vertical-align: middle;"></span> <?php esc_html_e( 'Support', 'hpos-compatibility-scanner' ); ?>
 		</a>
 		<a id="hpos-scanner-docs-btn" href="https://github.com/dustinparker/hpos-compatibility-scanner/" target="_blank" class="button button-alt" style="margin-left: 5px;">
