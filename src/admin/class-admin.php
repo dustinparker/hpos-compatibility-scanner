@@ -54,9 +54,11 @@ class Admin {
 			return;
 		}
 
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
 		wp_enqueue_script(
 			'hpos-scanner',
-			HPOS_COMPATIBILITY_SCANNER_PLUGIN_URL . '/assets/js/hpos-scanner.js',
+			HPOS_COMPATIBILITY_SCANNER_PLUGIN_URL . '/assets/js/hpos-scanner' . $suffix . '.js',
 			array(),
 			HPOS_COMPATIBILITY_SCANNER_VERSION,
 			true
