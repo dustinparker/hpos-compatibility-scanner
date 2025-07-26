@@ -29,11 +29,13 @@ Plugins that directly access the WordPress database tables for order data may no
 
 ## Installation
 
-1. **Download the Plugin**: Clone or download the repository as a `.zip` file.
+1. **Download the Plugin**:
+    - Visit the [GitHub releases page](https://github.com/dustinparker/hpos-compatibility-scanner/releases).
+    - Download the latest release zip file.
 2. **Upload to WordPress**:
     - Navigate to `Plugins > Add New`.
     - Click on `Upload Plugin`.
-    - Upload the `.zip` file and click `Install Now`.
+    - Upload the downloaded `.zip` file and click `Install Now`.
 3. **Activate the Plugin**:
     - Go to `Plugins > Installed Plugins`.
     - Activate the "HPOS Compatibility Scanner" plugin.
@@ -60,61 +62,6 @@ Plugins that directly access the WordPress database tables for order data may no
 
 ---
 
-## Plugin Architecture
-
-The plugin follows a modern, object-oriented architecture with proper namespacing:
-
-- **Namespace**: `DPWD\HPOSCompatPlugin`
-- **Directory Structure**:
-  - `src/` - Contains all PHP classes organized by functionality
-  - `src/Admin/` - Admin interface and settings page
-  - `src/Scanner/` - Core scanning functionality
-  - `src/Compatibility/` - HPOS compatibility checking and caching
-
-### Extending the Plugin
-
-To extend or modify the plugin:
-
-1. Follow the existing namespace structure (`DPWD\HPOSCompatPlugin`)
-2. Use Composer for autoloading and dependencies
-3. Follow WordPress coding standards and best practices
-
-## Development
-
-This plugin uses modern frontend build tools to optimize JavaScript and CSS assets.
-
-### Requirements
-
-- PHP 8.2 or later
-- WordPress 6.0 or later
-- WooCommerce 7.0 or later
-- Node.js 16 or later
-- npm 8 or later
-- Composer
-
-### Setup
-
-1. Clone the repository
-2. Run `composer install` to install PHP dependencies
-3. Run `npm install` to install JavaScript dependencies
-
-### Available npm Scripts
-
-- `npm run build` - Build the plugin for production (minified JS/CSS)
-- `npm run build:dev` - Build the plugin for development
-- `npm run build:js` - Build only JavaScript files
-- `npm run build:css` - Build only CSS files
-- `npm run watch` - Watch for changes in JS and CSS files and rebuild automatically
-- `npm run lint` - Run linting on JS and CSS files
-- `npm run lint:js` - Run linting on JS files only
-- `npm run lint:css` - Run linting on CSS files only
-
-### Asset Structure
-
-- JavaScript files are located in `assets/js/`
-- CSS files are located in `assets/css/`
-- Source files are processed and minified versions are created with the `.min` suffix
-
 ## Contributing
 
 We welcome contributions from the community. Here's how you can help:
@@ -126,20 +73,6 @@ We welcome contributions from the community. Here's how you can help:
 ## License
 
 This plugin is licensed under the GNU General Public License v2.0 or later (GPL-2.0-or-later).
-
-## Changelog
-
-### 1.0.2 (Current)
-- Added compatibility caching for better performance
-- Added Plugins Overview tab to view all plugins' compatibility status
-- Fixed various bugs and improved scanning accuracy
-
-### 1.0.1
-- Improved scanning algorithm to reduce false positives
-- Added support for more compatibility declaration patterns
-
-### 1.0.0
-- Initial release
 
 ## Credits
 
