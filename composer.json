@@ -29,9 +29,9 @@
             "composer.json",
             "composer.lock",
             "package.json",
-            ".gitignore",
             "README.md",
-            "version-bump.js"
+            "version-bump.js",
+            ".*"
         ]
     },
     "config": {
