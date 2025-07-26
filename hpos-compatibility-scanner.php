@@ -17,9 +17,9 @@
 namespace DPWD\HPOSCompatPlugin;
 
 // Exit if accessed directly.
-use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+use YahnisElsts\PluginUpdateChecker\v5p6\PucFactory;
 
-if ( ! defined( 'WPINC' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
@@ -27,11 +27,14 @@ if ( ! defined( 'WPINC' ) ) {
 add_action(
 	'init',
 	function () {
-		( PucFactory::buildUpdateChecker(
+		$update_checker = PucFactory::buildUpdateChecker(
 			'https://github.com/dustinparker/hpos-compatibility-scanner/',
 			__FILE__,
 			'hpos-compatibility-scanner'
-		) )->setBranch( 'main' );
+		);
+
+		$update_checker->getVcsApi()->enableReleaseAssets();
+		$update_checker->setBranch( 'main' );
 	}
 );
 
