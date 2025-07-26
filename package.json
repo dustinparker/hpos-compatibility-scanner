@@ -1,0 +1,64 @@
+{
+  "name": "hpos-compatibility-scanner",
+  "version": "1.0.2",
+  "description": "Scans plugins for potential HPOS compatibility issues by checking for direct database access or inappropriate WordPress API usage.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.5",
+    "rimraf": "^6.0.1",
+    "sass": "^1.89.1",
+    "stylelint": "^16.3.0",
+    "eslint": "^8.57.0"
+  },
+  "scripts": {
+    "build": "npm run clean:vendor && composer install -o --no-dev && npm run build:css && npm run build:js && npm run archive",
+    "build:dev": "composer install -o && npm run build:css && npm run build:js",
+    "clean:vendor": "rimraf ./vendor",
+    "archive": "composer archive --file=$npm_package_name --format=zip",
+    "postarchive": "rimraf --glob $npm_package_name && unzip $npm_package_name.zip -d $npm_package_name && rimraf --glob $npm_package_name.zip && zip -r $npm_package_name.zip $npm_package_name && rm -rf $npm_package_name",
+    "lint:js": "eslint assets/js/*.js",
+    "lint:css": "stylelint assets/css/*.css",
+    "lint": "npm run lint:js && npm run lint:css",
+    "build:js": "npm run clean:js && esbuild assets/js/*.js --minify --sourcemap --outdir=assets/js --out-extension:.js=.min.js",
+    "clean:js": "rimraf --glob assets/js/*.min.js assets/js/*.js.map",
+    "build:css": "npm run clean:css && sass assets/css:assets/css --no-source-map --style=compressed",
+    "clean:css": "rimraf --glob assets/css/*.css.map",
+    "watch:js": "esbuild assets/js/*.js --watch --minify --sourcemap --outdir=assets/js --out-extension:.js=.min.js",
+    "watch:css": "sass assets/css:assets/css --watch --no-source-map --style=compressed",
+    "watch": "npm-run-all --parallel watch:*",
+    "bump": "node version-bump.js",
+    "bump:major": "node version-bump.js major",
+    "wpcs": "composer wpcs",
+    "wpcs:fix": "composer wpcs:fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dustinparker/hpos-compatibility-scanner.git"
+  },
+  "keywords": [
+    "wordpress",
+    "woocommerce",
+    "hpos",
+    "compatibility",
+    "scanner"
+  ],
+  "author": {
+    "name": "Dustin Parker",
+    "url": "https://dustinparkerwebdev.com/"
+  },
+  "contributors": [
+    {
+      "name": "Robert DeVore",
+      "url": "https://robertdevore.com/"
+    }
+  ],
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/dustinparker/hpos-compatibility-scanner/issues"
+  },
+  "homepage": "https://github.com/dustinparker/hpos-compatibility-scanner#readme"
+}

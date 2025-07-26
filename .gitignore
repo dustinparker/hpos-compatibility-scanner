@@ -1,0 +1,5 @@
+/hpos-compatibility-scanner.zip
+/pnpm-lock.yaml
+/node_modules/
+/vendor/
+/assets/js/*.min.js*

@@ -1,0 +1,12 @@
+<?php
+/**
+ * Bootstrap file for PHPStan.
+ *
+ * @package DPWD\HPOSCompatPlugin
+ */
+
+define( 'HPOS_COMPATIBILITY_SCANNER_VERSION', '1.0.2' );
+define( 'HPOS_COMPATIBILITY_SCANNER_PLUGIN_FILE', __FILE__ );
+define( 'HPOS_COMPATIBILITY_SCANNER_PLUGIN_BASENAME', plugin_basename( HPOS_COMPATIBILITY_SCANNER_PLUGIN_FILE ) );
+define( 'HPOS_COMPATIBILITY_SCANNER_PLUGIN_DIR_PATH', untrailingslashit( plugin_dir_path( HPOS_COMPATIBILITY_SCANNER_PLUGIN_FILE ) ) );
+define( 'HPOS_COMPATIBILITY_SCANNER_PLUGIN_URL', untrailingslashit( plugins_url( '/', HPOS_COMPATIBILITY_SCANNER_PLUGIN_FILE ) ) );

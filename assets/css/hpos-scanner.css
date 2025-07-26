@@ -28,18 +28,34 @@
     margin-top: 20px;
 }
 
+/* CSV Download container and separator info styles */
+.hpos-csv-download-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.hpos-csv-separator-info {
+    margin-left: 10px;
+    color: #666;
+    font-size: 13px;
+    font-style: italic;
+}
+
 .hpos-results table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     font-size: 14px;
     text-align: left;
+    table-layout: fixed;
 }
 
 .hpos-results th, 
 .hpos-results td {
     border: 1px solid #ddd;
     padding: 8px;
+    vertical-align: top;
 }
 
 .hpos-results th {
@@ -47,20 +63,102 @@
     font-weight: bold;
 }
 
-.hpos-results tr:nth-child(even) {
-    background-color: #f9f9f9;
+/* Column widths */
+.hpos-results-table th:nth-child(1) {
+    width: 20%;
 }
 
-.hpos-results tr:hover {
+.hpos-results-table th:nth-child(2) {
+    width: 15%;
+}
+
+.hpos-results-table th:nth-child(3) {
+    width: 20%;
+}
+
+.hpos-results-table th:nth-child(4) {
+    width: 10%;
+}
+
+.hpos-results-table th:nth-child(5) {
+    width: 35%;
+}
+
+.hpos-results tr.hpos-result-row {
+    background-color: #fff;
+}
+
+.hpos-results tr.hpos-result-row:hover {
     background-color: #f1f1f1;
+}
+
+.hpos-results tr.hpos-snippet-row {
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #ddd;
+}
+
+.hpos-results tr.hpos-snippet-row td {
+    padding: 0;
 }
 
 .hpos-results td {
     word-break: break-word;
 }
 
+.hpos-code-cell {
+    position: relative;
+}
+
+.hpos-code-preview {
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 8px;
+    padding: 4px;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    border: 1px solid #eee;
+}
+
+.hpos-code-snippet {
+    font-family: monospace;
+    white-space: pre-wrap;
+    margin: 0;
+    padding: 12px;
+    background-color: #f8f8f8;
+    border-left: 4px solid #0073aa;
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+.hpos-toggle-snippet {
+    font-size: 12px !important;
+    height: 24px !important;
+    line-height: 22px !important;
+    padding: 0 8px !important;
+}
+
 .hpos-results .button {
     margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 782px) {
+    .hpos-results-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .hpos-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .hpos-select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
 
 .wrap.hpos-settings-page hr {
@@ -72,4 +170,195 @@
     float: right;
     line-height: 26px;
     margin-left: 12px;
+}
+
+/* HPOS Compatibility Status Styles */
+.hpos-compatibility-status {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.hpos-compatible {
+    background-color: #ecf9ec;
+    border: 1px solid #46b450;
+    color: #2a6a30;
+}
+
+.hpos-not-compatible {
+    background-color: #fbeaea;
+    border: 1px solid #dc3232;
+    color: #a72121;
+}
+
+.hpos-compatibility-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.hpos-compatibility-text {
+    flex: 1;
+}
+
+/* Tab Navigation Styles */
+.hpos-tab-content {
+    margin-top: 20px;
+}
+
+/* Overview Table Styles */
+.hpos-overview-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.hpos-overview-table th {
+    text-align: left;
+    padding: 10px;
+}
+
+.hpos-overview-table td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.hpos-overview-table .column-plugin {
+    width: 25%;
+}
+
+.hpos-overview-table .column-version {
+    width: 10%;
+}
+
+.hpos-overview-table .column-author {
+    width: 20%;
+}
+
+.hpos-overview-table .column-compatible {
+    width: 20%;
+}
+
+.hpos-overview-table .column-actions {
+    width: 15%;
+}
+
+.hpos-loading {
+    padding: 20px;
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+.hpos-scan-overview-button {
+    margin-right: 5px !important;
+}
+
+.hpos-compatibility-indicator {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.hpos-compatibility-indicator.compatible {
+    background-color: #ecf9ec;
+    border: 1px solid #46b450;
+    color: #2a6a30;
+}
+
+.hpos-compatibility-indicator.not-compatible {
+    background-color: #fbeaea;
+    border: 1px solid #dc3232;
+    color: #a72121;
+}
+
+.hpos-compatibility-indicator.unknown {
+    background-color: #f8f8f8;
+    border: 1px solid #ccd0d4;
+    color: #666;
+}
+
+/* Responsive styles for the overview table */
+@media screen and (max-width: 782px) {
+    .hpos-overview-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .hpos-overview-table th,
+    .hpos-overview-table td {
+        padding: 8px 5px;
+    }
+    
+    .hpos-overview-table .column-plugin {
+        width: auto;
+    }
+    
+    .hpos-overview-table .column-version,
+    .hpos-overview-table .column-author {
+        display: none;
+    }
+
+    /* Cache info and refresh button styles */
+    .hpos-overview-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #f8f8f8;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+    }
+
+    .hpos-cache-info {
+        display: flex;
+        flex-direction: column;
+        font-size: 13px;
+        color: #666;
+    }
+
+    .hpos-cache-text {
+        margin-bottom: 5px;
+    }
+
+    .hpos-last-updated {
+        font-style: italic;
+    }
+
+    #hpos-refresh-cache {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    #hpos-refresh-cache .dashicons {
+        margin-right: 5px;
+    }
+
+    #hpos-refresh-cache.hpos-refreshing .dashicons {
+        animation: hpos-spin 2s linear infinite;
+    }
+
+    @keyframes hpos-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive styles for the cache info and refresh button */
+    @media screen and (max-width: 782px) {
+        .hpos-overview-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    
+        .hpos-cache-info {
+            margin-bottom: 10px;
+        }
+    }
 }
