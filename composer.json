@@ -24,6 +24,7 @@
     "archive": {
         "exclude": [
             "!/assets",
+            "assets/js/*.map",
             "!/languages",
             "!/vendor",
             "composer.json",
@@ -31,7 +32,8 @@
             "package.json",
             "README.md",
             "version-bump.js",
-            ".*"
+            ".*",
+            "*.yaml"
         ]
     },
     "config": {
