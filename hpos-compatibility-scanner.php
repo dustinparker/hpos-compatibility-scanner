@@ -34,7 +34,6 @@ add_action(
 		);
 
 		$update_checker->getVcsApi()->enableReleaseAssets();
-		$update_checker->setBranch( 'main' );
 	}
 );
 
