@@ -78,5 +78,5 @@ This plugin is licensed under the GNU General Public License v2.0 or later (GPL-
 
 - Original Author: Robert DeVore
 - Current Maintainer: Dustin Parker
-- Website: https://dustinparkerwebdev.com/
+- Contact: [https://dustinparkerwebdev.com/](https://dustinparkerwebdev.com/contact/)
 - GitHub Repository: https://github.com/dustinparker/hpos-compatibility-scanner/
