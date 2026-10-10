@@ -58,6 +58,8 @@ final class Smoke_Test extends Ajax_Test_Case {
 		$this->assertTrue( class_exists( 'DPWD\HPOSCompatPlugin\Admin\Admin' ) );
 		$this->assertTrue( class_exists( 'DPWD\HPOSCompatPlugin\Scanner\Scanner' ) );
 		$this->assertTrue( class_exists( 'DPWD\HPOSCompatPlugin\Compatibility\Compatibility' ) );
+		$this->assertTrue( class_exists( 'DPWD\HPOSCompatPlugin\Scanner\Directory_Scanner' ) );
+		$this->assertTrue( class_exists( 'DPWD\HPOSCompatPlugin\Scanner\Directory_Open_Exception' ) );
 	}
 
 	/**
@@ -71,6 +73,8 @@ final class Smoke_Test extends Ajax_Test_Case {
 		$this->assertStringContainsString( 'DPWD\\\\HPOSCompatPlugin\\\\Admin\\\\Admin', $classmap );
 		$this->assertStringContainsString( 'DPWD\\\\HPOSCompatPlugin\\\\Scanner\\\\Scanner', $classmap );
 		$this->assertStringContainsString( 'DPWD\\\\HPOSCompatPlugin\\\\Compatibility\\\\Compatibility', $classmap );
+		$this->assertStringContainsString( 'DPWD\\\\HPOSCompatPlugin\\\\Scanner\\\\Directory_Scanner', $classmap );
+		$this->assertStringContainsString( 'DPWD\\\\HPOSCompatPlugin\\\\Scanner\\\\Directory_Open_Exception', $classmap );
 	}
 
 	/**
