@@ -31,6 +31,8 @@
             "composer.lock",
             "package.json",
             "README.md",
+            "SECURITY.md",
+            "/drafts",
             "version-bump.js",
             ".*",
             "*.yaml"
