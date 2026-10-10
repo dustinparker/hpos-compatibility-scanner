@@ -1,7 +1,7 @@
 {
     "name": "dpwd/hpos-compatibility-plugin",
     "description": "Scans plugins for potential HPOS compatibility issues by checking for direct database access or inappropriate WordPress API usage.",
-    "license": "GPL-2.0+",
+    "license": "GPL-2.0-or-later",
     "require": {
         "php": ">=7.4",
         "automattic/jetpack-autoloader": "^2.11",
