@@ -74,6 +74,14 @@ We welcome contributions from the community. Here's how you can help:
 
 This plugin is licensed under the GNU General Public License v2.0 or later (GPL-2.0-or-later).
 
+## Disclaimer
+
+The scan results are a guide. The scanner matches patterns in a plugin's code, so it can miss a compatibility problem and it can flag code that is safe. It reads a plugin's HPOS compatibility declaration and does not test whether that declaration is true.
+
+Test on a staging site and take a backup before you enable HPOS or change anything on a live store.
+
+This plugin is provided "as is", without warranty of any kind, and the authors are not liable for any damages that come from using it. See sections 11 and 12 of the [LICENSE](LICENSE) for the full terms.
+
 ## Credits
 
 - Original Author: Robert DeVore
