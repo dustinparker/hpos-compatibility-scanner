@@ -240,4 +240,49 @@ final class Directory_Scanner_Test extends Ajax_Test_Case {
 			$this->assertStringContainsString( 'Permission denied', $e->getMessage() );
 		}
 	}
+
+	/**
+	 * Unreadable files are skipped and every readable file is still reported.
+	 *
+	 * The folder holds several of each kind, because the walk order is the filesystem's. A break in place of the
+	 * skip would then drop the readable files that come after the first unreadable one.
+	 */
+	public function test_unreadable_files_are_skipped_and_readable_files_are_reported(): void {
+		$this->skip_without_folder_permissions();
+
+		$folder = Fixture_Plugins::path() . '/unreadable-files';
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir -- Test support outside WordPress.
+		$this->assertTrue( mkdir( $folder, 0755 ) );
+
+		$expected = array();
+
+		for ( $i = 1; $i <= 6; $i++ ) {
+			$readable = $folder . '/readable-' . $i . '.php';
+			$locked   = $folder . '/locked-' . $i . '.php';
+			$code     = "<?php\n\$value = 'hpos_unreadable_file_term';\n";
+
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- Test support outside WordPress.
+			$this->assertNotFalse( file_put_contents( $readable, $code ) );
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- Test support outside WordPress.
+			$this->assertNotFalse( file_put_contents( $locked, $code ) );
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod -- Test support outside WordPress.
+			$this->assertTrue( chmod( $locked, 0000 ) );
+
+			$this->locked[] = $locked;
+			$expected[]     = '/unreadable-files/readable-' . $i . '.php';
+		}
+
+		add_filter(
+			'hpos_compatibility_scanner_search_terms',
+			static function () {
+				return array( 'hpos_unreadable_file_term' );
+			}
+		);
+
+		$files = array_column( ( new Directory_Scanner() )->scan( $folder ), 'file' );
+		sort( $files );
+
+		$this->assertSame( $expected, $files );
+	}
 }
