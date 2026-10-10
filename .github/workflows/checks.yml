@@ -64,3 +64,100 @@ jobs:
       # The plugin supports PHP 7.4, so its own files must parse there.
       - name: Check that every plugin file parses
         run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n 1 php -l
+
+  tests:
+    name: Tests (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ '7.4', '8.2' ]
+    services:
+      mariadb:
+        image: mariadb:12.3
+        env:
+          MARIADB_ROOT_PASSWORD: ci-throwaway-password
+          MARIADB_DATABASE: hpos_scanner_tests
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      WP_TESTS_DB_HOST: 127.0.0.1
+      WP_TESTS_DB_PORT: '3306'
+      WP_TESTS_DB_USER: root
+      WP_TESTS_DB_PASSWORD: ci-throwaway-password
+      WP_TESTS_DB_NAME: hpos_scanner_tests
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Run the test suite
+        run: vendor/bin/phpunit
+
+  mutation:
+    name: Mutation testing
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      mariadb:
+        image: mariadb:12.3
+        env:
+          MARIADB_ROOT_PASSWORD: ci-throwaway-password
+          MARIADB_DATABASE: hpos_scanner_tests
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      WP_TESTS_DB_HOST: 127.0.0.1
+      WP_TESTS_DB_PORT: '3306'
+      WP_TESTS_DB_USER: root
+      WP_TESTS_DB_PASSWORD: ci-throwaway-password
+      WP_TESTS_DB_NAME: hpos_scanner_tests
+      BASE_REF: ${{ github.base_ref }}
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: '8.2'
+          coverage: pcov
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Install Infection
+        run: composer install --no-interaction --no-progress --prefer-dist --working-dir=tools/infection
+
+      - name: Run Infection on the changed lines
+        run: tools/infection/vendor/bin/infection --threads=4 --git-diff-lines --git-diff-base="origin/${BASE_REF}" --with-uncovered --show-mutations=max --min-msi=100 --ignore-msi-with-no-mutations --initial-tests-php-options=-dpcov.directory=src
