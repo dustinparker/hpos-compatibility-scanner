@@ -20,7 +20,7 @@ use UnexpectedValueException;
 final class Directory_Scanner_Test extends Ajax_Test_Case {
 
 	/**
-	 * Folders made unreadable by a test, restored in tear_down().
+	 * Paths made unreadable by a test, restored in tear_down().
 	 *
 	 * @var string[]
 	 */
