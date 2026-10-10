@@ -1,0 +1,75 @@
+{
+	"$schema": "tools/infection/vendor/infection/infection/resources/schema.json",
+	source: { directories: [ "src" ] },
+	timeout: 30,
+	// Lets Infection resolve the plugin classes by name, which the ignore lists below rely on.
+	bootstrap: "tools/infection/infection-bootstrap.php",
+	logs: {
+		text: ".infection/infection.log",
+		summary: ".infection/summary.log",
+	},
+	phpUnit: { configDir: ".", customPath: "vendor/bin/phpunit" },
+	mutators: {
+		"@default": true,
+		ArrayItemRemoval: {
+			settings: { remove: "all", limit: 100 },
+			ignore: [
+				// The constructors run while the plugin loads, before coverage starts, so their hook lines always count as uncovered.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::__construct::27",
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::__construct::28",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::__construct::27",
+				// The directory iterator cannot throw here, because the handler has already checked that the folder is readable.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::86",
+			],
+		},
+		FunctionCallRemoval: {
+			ignore: [
+				// Constructor hook lines, see ArrayItemRemoval above.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::__construct::27",
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::__construct::28",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::__construct::27",
+				// Unreachable catch, see ArrayItemRemoval above.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::86",
+			],
+		},
+		Concat: {
+			ignore: [
+				// Unreachable catch, see ArrayItemRemoval above.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::86",
+			],
+		},
+		ConcatOperandRemoval: {
+			ignore: [
+				// Unreachable catch, see ArrayItemRemoval above.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::86",
+			],
+		},
+		FalseValue: {
+			ignore: [
+				// The public check returns early for a folder that is not readable, but get_plugins() never lists such a folder.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::42",
+				// The private check is only called after the handler has checked the folder, so its own guard never fires.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::231",
+			],
+		},
+		ReturnRemoval: {
+			ignore: [
+				// Same unreachable guards as FalseValue above.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::42",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::231",
+			],
+		},
+		Continue_: {
+			ignore: [
+				// Lines 64, 96 and 254 skip an unreadable file, and whether break differs from continue depends on the order the file system lists files in, so no fixture kills them reliably.
+				// Lines 70, 102 and 260 follow a successful is_readable(), so file() and file_get_contents() cannot return false there.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::64",
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::70",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::96",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::102",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::254",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::260",
+			],
+		},
+	},
+}

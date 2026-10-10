@@ -4,3 +4,5 @@
 /vendor/
 /assets/js/*.min.js*
 .wp-env.override.json
+/tools/infection/vendor/
+/.infection/
