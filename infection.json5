@@ -99,10 +99,10 @@
 		},
 		Continue_: {
 			ignore: [
-				// Lines 128 and 134 of Scanner follow the same reasoning as lines 64 and 70 of Compatibility below.
+				// Lines 128 and 134 of Scanner are the handler's copy of the check, and follow the same reasoning as lines 64 and 70 of Compatibility below.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::128",
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::134",
-				// Line 64 skips an unreadable file. No test makes a file unreadable, and Infection's interceptor reports unreadable paths as missing, so the line is not covered.
+				// Line 64 skips an unreadable file. The one scan test that makes files unreadable is in Directory_Scanner_Test, which calls Directory_Scanner directly and never runs this check, so the line is not covered.
 				// Line 70 follows a successful is_readable(), so file_get_contents() cannot return false there.
 				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::64",
 				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::70",
