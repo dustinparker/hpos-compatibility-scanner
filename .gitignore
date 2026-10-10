@@ -3,3 +3,4 @@
 /node_modules/
 /vendor/
 /assets/js/*.min.js*
+.wp-env.override.json

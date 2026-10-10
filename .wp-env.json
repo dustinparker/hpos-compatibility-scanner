@@ -1,0 +1,21 @@
+{
+	"core": null,
+	"phpVersion": "8.2",
+	"plugins": [
+		"https://downloads.wordpress.org/plugin/woocommerce.zip",
+		"."
+	],
+	"port": 7200,
+	"testsPort": 7201,
+	"config": {
+		"SCRIPT_DEBUG": true
+	},
+	"env": {
+		"development": {
+			"mysqlPort": 13506
+		},
+		"tests": {
+			"mysqlPort": 13507
+		}
+	}
+}
