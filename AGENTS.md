@@ -53,7 +53,7 @@ Kill each surviving mutant with a test, or list it in `infection.json5` with the
 
 The entries in `infection.json5` are keyed by line number. When a change moves lines in `Scanner`, `Directory_Scanner` or `Compatibility`, check every entry for the moved method, because an entry that no longer matches its line silently ignores whatever mutant now sits on that number.
 
-The three permission tests skip themselves when `file_exists()` reports a probe folder with mode 0000 as missing, which is what Infection's stream wrapper does. After upgrading Infection, run one full pass and check that those tests still skip inside mutant processes.
+The five permission tests skip themselves when `file_exists()` reports a probe folder with mode 0000 as missing, which is what Infection's stream wrapper does. After upgrading Infection, run one full pass and check that those tests still skip inside mutant processes.
 
 ## Switching the WooCommerce version
 

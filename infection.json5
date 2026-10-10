@@ -34,7 +34,7 @@
 			],
 		},
 		// Permissions note: Infection replaces the file stream wrapper, and the replacement reports a chmod 0000 folder as missing.
-		// The three permission tests skip themselves there, so the lines only they cover are listed in the entries marked "unreadable".
+		// The five permission tests skip themselves there, so the lines only they cover are listed in the entries marked "unreadable".
 		CastBool: {
 			ignore: [
 				// The bool return type coerces the cached value, so the cast changes nothing.
@@ -106,7 +106,7 @@
 				// Line 70 follows a successful is_readable(), so file_get_contents() cannot return false there.
 				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::64",
 				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::70",
-				// Lines 75 and 81 of Directory_Scanner follow the same reasoning as lines 64 and 70 above.
+				// Line 75 of Directory_Scanner is pinned by a permission test that skips itself inside Infection, so the mutant survives there. Line 81 follows the same reasoning as line 70 above.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Directory_Scanner::scan::75",
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Directory_Scanner::scan::81",
 				// A safe pattern marks every match on the line, so stopping the term loop after one changes nothing.
