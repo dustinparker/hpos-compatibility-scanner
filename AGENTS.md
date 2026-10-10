@@ -24,7 +24,7 @@ The database connection comes from five variables, each with a fallback that mat
 - `WP_TESTS_DB_HOST`, default `127.0.0.1`
 - `WP_TESTS_DB_PORT`, default `13507`
 
-A second checkout that runs at the same time must set `WP_TESTS_DB_NAME` to its own name, because the suite drops and recreates its tables.
+A second checkout that runs at the same time must set `WP_TESTS_DB_NAME` to its own name, because the suite drops and recreates its tables. The temporary plugins folder in `/tmp` already carries a hash of the checkout path, so checkouts do not share it.
 
 ## Expected responses
 

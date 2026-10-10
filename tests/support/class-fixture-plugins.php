@@ -42,10 +42,17 @@ final class Fixture_Plugins {
 	}
 
 	/**
+	 * Short hash of the checkout path, so checkouts and worktrees get separate folders.
+	 */
+	public static function checkout_id(): string {
+		return substr( md5( dirname( __DIR__, 2 ) ), 0, 8 );
+	}
+
+	/**
 	 * The plugins folder of this process, used as WP_PLUGIN_DIR.
 	 */
 	public static function path(): string {
-		return sys_get_temp_dir() . self::FOLDER_PREFIX . self::token();
+		return sys_get_temp_dir() . self::FOLDER_PREFIX . self::checkout_id() . '-' . self::token();
 	}
 
 	/**

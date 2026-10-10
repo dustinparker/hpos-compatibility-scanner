@@ -60,6 +60,19 @@ final class Fixture_Plugins_Test extends TestCase {
 	}
 
 	/**
+	 * The path carries a checkout part, so two checkouts never share a folder.
+	 */
+	public function test_path_names_the_checkout(): void {
+		$expected = substr( md5( dirname( __DIR__, 2 ) ), 0, 8 );
+
+		$this->assertSame( $expected, Fixture_Plugins::checkout_id() );
+		$this->assertSame(
+			sys_get_temp_dir() . '/hpos-scanner-tests-' . $expected . '-' . Fixture_Plugins::token(),
+			Fixture_Plugins::path()
+		);
+	}
+
+	/**
 	 * The copy holds the fixtures.
 	 */
 	public function test_create_copies_the_fixtures(): void {
