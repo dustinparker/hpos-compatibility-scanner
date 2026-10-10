@@ -99,7 +99,7 @@ final class Fixture_Rules_Test extends TestCase {
 	}
 
 	/**
-	 * Every top-level fixture is mapped into the wp-env site, and every mapping has a fixture.
+	 * Every top-level fixture is mapped into the wp-env development site only, and every mapping has a fixture.
 	 */
 	public function test_every_fixture_has_a_mapping_and_every_mapping_a_fixture(): void {
 		$expected = array();
@@ -115,9 +115,11 @@ final class Fixture_Rules_Test extends TestCase {
 		$config = json_decode( file_get_contents( dirname( __DIR__, 2 ) . '/.wp-env.json' ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local file.
 
 		$this->assertIsArray( $config );
-		$this->assertArrayHasKey( 'mappings', $config );
+		$this->assertArrayNotHasKey( 'mappings', $config, 'Root-level mappings also reach the tests site.' );
+		$this->assertArrayNotHasKey( 'mappings', $config['env']['tests'], 'The tests site gets no fixture mounts.' );
+		$this->assertArrayHasKey( 'mappings', $config['env']['development'] );
 
-		$actual = $config['mappings'];
+		$actual = $config['env']['development']['mappings'];
 
 		ksort( $expected );
 		ksort( $actual );

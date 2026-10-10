@@ -10,6 +10,8 @@ Run `composer install` in the repository root and `composer install --working-di
 
 Run `npm run env:start` to start the site and `npm run env:stop` to stop it. The site is on port 7200 and the tests site is on port 7201. The login values are in the wp-env documentation: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/
 
+The fixture plugins are mapped into the site on port 7200 only, under `env.development.mappings` in `.wp-env.json`. Keep every mapping there. A root-level mapping or one under `env.tests` also mounts into the tests site, and Docker then creates root-owned placeholder files for the single-file fixtures that make the next reconfiguring `wp-env start` fail with `EACCES`. A test checks this.
+
 `npm run env:destroy` and `wp-env clean` delete the containers and the database. Both are the owner's steps, so do not run them.
 
 ## Running the suite
