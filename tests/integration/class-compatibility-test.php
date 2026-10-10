@@ -7,8 +7,10 @@
 
 namespace DPWD\HPOSCompatPlugin\Tests\Integration;
 
+use DPWD\HPOSCompatPlugin\Compatibility\Compatibility;
 use DPWD\HPOSCompatPlugin\Tests\Support\Ajax_Test_Case;
 use DPWD\HPOSCompatPlugin\Tests\Support\Fixture_Plugins;
+use ReflectionClass;
 
 /**
  * Compatibility_Test class.
@@ -32,6 +34,9 @@ final class Compatibility_Test extends Ajax_Test_Case {
 		'compat-private-hpos-compatible'    => array( false, true ),
 		'compat-private-split'              => array( false, true ),
 		'compat-declares-incompatible'      => array( true, true ),
+		'compat-all-patterns'               => array( true, true ),
+		'compat-non-php-declaration'        => array( false, false ),
+		'compat-uppercase-extension'        => array( true, true ),
 		'cache-probe'                       => array( false, false ),
 	);
 
@@ -166,18 +171,79 @@ final class Compatibility_Test extends Ajax_Test_Case {
 			delete_option( $name );
 		}
 
+		// The refresh deletes each key and never reads the old value.
+		$deleted = array();
+		$read    = array();
+		$folders = array_merge( array_keys( self::VERDICTS ), array( 'single-file-with-folder' ) );
+
+		foreach ( $folders as $folder ) {
+			$key = $this->transient_key( $folder );
+
+			add_action(
+				'delete_transient_' . $key,
+				static function () use ( &$deleted, $folder ) {
+					$deleted[] = $folder;
+				}
+			);
+			add_filter(
+				'pre_transient_' . $key,
+				static function ( $pre ) use ( &$read, $folder ) {
+					$read[] = $folder;
+					return $pre;
+				}
+			);
+		}
+
 		$response = $this->call( 'hpos_refresh_compatibility_cache' );
 		$this->assert_expected( 'refresh', $response );
 
 		$this->assertTrue( $response['success'] );
 		$this->assertEqualsCanonicalizing( array( 'message', 'last_updated' ), array_keys( $response['data'] ) );
 		$this->assertSame( 'Compatibility cache refreshed successfully.', $response['data']['message'] );
+		$this->assertEqualsCanonicalizing( $folders, $deleted );
+		$this->assertSame( array(), $read );
 
 		foreach ( self::VERDICTS as $folder => $verdict ) {
 			$key = $this->transient_key( $folder );
 
 			$this->assertNotFalse( get_option( '_transient_timeout_' . $key ), $folder );
 			$this->assertSame( $verdict[0] ? '1' : '', $this->stored_value( $key ), $folder );
+		}
+
+		// A single file at the plugins root refreshes the folder with its name, when there is one, and nothing else.
+		$this->assertNotFalse( get_option( '_transient_timeout_' . $this->transient_key( 'single-file-with-folder' ) ) );
+		$this->assertSame( '1', $this->stored_value( $this->transient_key( 'single-file-with-folder' ) ) );
+		$this->assertNull( $this->stored_value( $this->transient_key( 'single-file' ) ) );
+		$this->assertNull( $this->stored_value( 'hpos_compatibility_' . md5( WP_PLUGIN_DIR . '/' ) ) );
+	}
+
+	/**
+	 * The public check can be called directly: without the second argument it reads the cache.
+	 */
+	public function test_direct_check_reads_the_cache_by_default(): void {
+		$checker = ( new ReflectionClass( Compatibility::class ) )->newInstanceWithoutConstructor();
+		$folder  = Fixture_Plugins::path() . '/cache-probe';
+		$key     = 'hpos_compatibility_' . md5( $folder );
+
+		$this->assertFalse( $checker->check_hpos_compatibility( $folder ) );
+		$this->assertSame( '', $this->stored_value( $key ) );
+
+		set_transient( $key, true, 86400 );
+
+		$this->assertTrue( $checker->check_hpos_compatibility( $folder ) );
+		$this->assertFalse( $checker->check_hpos_compatibility( $folder, true ) );
+		$this->assertSame( '', $this->stored_value( $key ) );
+	}
+
+	/**
+	 * A path that is not a folder gives false and leaves no transient.
+	 */
+	public function test_direct_check_ignores_paths_that_are_not_folders(): void {
+		$checker = ( new ReflectionClass( Compatibility::class ) )->newInstanceWithoutConstructor();
+
+		foreach ( array( Fixture_Plugins::path() . '/single-file.php', Fixture_Plugins::path() . '/missing' ) as $path ) {
+			$this->assertFalse( $checker->check_hpos_compatibility( $path, true ), $path );
+			$this->assertNull( $this->stored_value( 'hpos_compatibility_' . md5( $path ) ), $path );
 		}
 	}
 
@@ -206,9 +272,7 @@ final class Compatibility_Test extends Ajax_Test_Case {
 	 * A subfolder the process cannot open makes the check give up and report not compatible.
 	 */
 	public function test_overview_with_unreadable_subfolder_reports_not_compatible(): void {
-		if ( function_exists( 'posix_geteuid' ) && 0 === posix_geteuid() ) {
-			$this->markTestSkipped( 'Running as root, so folder permissions do not apply.' );
-		}
+		$this->skip_without_folder_permissions();
 
 		$path = Fixture_Plugins::path() . '/compat-featuresutil/locked';
 

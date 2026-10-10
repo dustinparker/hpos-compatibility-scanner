@@ -51,15 +51,6 @@ final class Scan_Edges_Test extends Ajax_Test_Case {
 	}
 
 	/**
-	 * Skip when the process can read any folder, which makes permission tests meaningless.
-	 */
-	private function skip_as_root(): void {
-		if ( function_exists( 'posix_geteuid' ) && 0 === posix_geteuid() ) {
-			$this->markTestSkipped( 'Running as root, so folder permissions do not apply.' );
-		}
-	}
-
-	/**
 	 * Make a folder in the plugins copy and lock it.
 	 *
 	 * @param string $relative Folder relative to the plugins folder.
@@ -99,9 +90,10 @@ final class Scan_Edges_Test extends Ajax_Test_Case {
 		$normalized = $this->assert_expected( 'scan-comment-rule', $this->scan( 'comment-rule/comment-rule.php' ) );
 		$issues     = $normalized['data']['issues']['/comment-rule/comment-rule.php'];
 
-		$this->assertCount( 2, $issues );
+		$this->assertCount( 3, $issues );
 		$this->assertSame( 15, $issues[0]['line'] );
 		$this->assertSame( 16, $issues[1]['line'] );
+		$this->assertSame( 17, $issues[2]['line'] );
 	}
 
 	/**
@@ -175,7 +167,7 @@ final class Scan_Edges_Test extends Ajax_Test_Case {
 	 * A plugin folder the process cannot read gets the inaccessible message.
 	 */
 	public function test_unreadable_directory_message(): void {
-		$this->skip_as_root();
+		$this->skip_without_folder_permissions();
 		$this->make_locked_folder( 'unreadable-dir' );
 
 		$response = $this->scan( 'unreadable-dir' );
@@ -188,7 +180,7 @@ final class Scan_Edges_Test extends Ajax_Test_Case {
 	 * An unreadable subfolder is not handled: the exception leaves the AJAX handler before any JSON is sent.
 	 */
 	public function test_unreadable_subfolder_throws(): void {
-		$this->skip_as_root();
+		$this->skip_without_folder_permissions();
 		$this->make_locked_folder( 'comment-rule/locked' );
 
 		$this->_setRole( 'administrator' );

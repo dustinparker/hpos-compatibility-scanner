@@ -53,6 +53,22 @@ abstract class Ajax_Test_Case extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
+	 * Skip a test that relies on folder permissions.
+	 *
+	 * Root reads any folder. Infection's include interceptor reports an unreadable path as missing,
+	 * so inside a mutant process the test would fail whatever the mutation is.
+	 */
+	protected function skip_without_folder_permissions(): void {
+		if ( function_exists( 'posix_geteuid' ) && 0 === posix_geteuid() ) {
+			$this->markTestSkipped( 'Running as root, so folder permissions do not apply.' );
+		}
+
+		if ( class_exists( 'Infection\\StreamWrapper\\IncludeInterceptor', false ) ) {
+			$this->markTestSkipped( 'Infection reports an unreadable folder as missing.' );
+		}
+	}
+
+	/**
 	 * Compare a response with its stored file, or rewrite the file in regenerate mode.
 	 *
 	 * @param string               $name     Expected file name without the extension.
