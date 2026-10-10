@@ -270,20 +270,25 @@ final class Compatibility_Test extends Ajax_Test_Case {
 
 	/**
 	 * A subfolder the process cannot open makes the check give up and report not compatible.
+	 *
+	 * The plugin has no readable declaring file, so the walk always reaches the locked folder. A readable
+	 * declaring file listed before the folder would end the walk early and give compatible instead.
 	 */
 	public function test_overview_with_unreadable_subfolder_reports_not_compatible(): void {
 		$this->skip_without_folder_permissions();
 
-		$path = Fixture_Plugins::path() . '/compat-featuresutil/locked';
+		$path = Fixture_Plugins::path() . '/cache-probe/locked';
 
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir -- Test support outside WordPress.
 		$this->assertTrue( mkdir( $path, 0755 ) );
 		$this->locked = $path;
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- Test support outside WordPress.
+		$this->assertNotFalse( file_put_contents( $path . '/declare.php', "<?php\nFeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );\n" ) );
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod -- Test support outside WordPress.
 		$this->assertTrue( chmod( $path, 0000 ) );
 
 		$response = $this->overview( array( 'force_refresh' => 'true' ) );
 
-		$this->assertFalse( $response['data']['plugins']['compat-featuresutil/compat-featuresutil.php']['compatible'] );
+		$this->assertFalse( $response['data']['plugins']['cache-probe/cache-probe.php']['compatible'] );
 	}
 }
