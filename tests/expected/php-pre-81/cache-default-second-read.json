@@ -1,0 +1,165 @@
+{
+    "success": true,
+    "data": {
+        "plugins": {
+            "cache-probe/cache-probe.php": {
+                "name": "Fixture: cache-probe",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "comment-rule/comment-rule.php": {
+                "name": "Fixture: comment-rule",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "compat-all-patterns/compat-all-patterns.php": {
+                "name": "Fixture: compat-all-patterns",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "compat-declares-incompatible/compat-declares-incompatible.php": {
+                "name": "Fixture: compat-declares-incompatible",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "compat-featuresutil/compat-featuresutil.php": {
+                "name": "Fixture: compat-featuresutil",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "compat-helper-declare-hpos/compat-helper-declare-hpos.php": {
+                "name": "Fixture: compat-helper-declare-hpos",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "compat-helper-declare-wc-hpos/compat-helper-declare-wc-hpos.php": {
+                "name": "Fixture: compat-helper-declare-wc-hpos",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "compat-helper-woocommerce-hpos/compat-helper-woocommerce-hpos.php": {
+                "name": "Fixture: compat-helper-woocommerce-hpos",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "compat-hook-before-init/compat-hook-before-init.php": {
+                "name": "Fixture: compat-hook-before-init",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "compat-hook-plugins-loaded/compat-hook-plugins-loaded.php": {
+                "name": "Fixture: compat-hook-plugins-loaded",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "compat-non-php-declaration/compat-non-php-declaration.php": {
+                "name": "Fixture: compat-non-php-declaration",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "compat-private-declare/compat-private-declare.php": {
+                "name": "Fixture: compat-private-declare",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "compat-private-hpos-compatibility/compat-private-hpos-compatibility.php": {
+                "name": "Fixture: compat-private-hpos-compatibility",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "compat-private-hpos-compatible/compat-private-hpos-compatible.php": {
+                "name": "Fixture: compat-private-hpos-compatible",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "compat-private-split/compat-private-split.php": {
+                "name": "Fixture: compat-private-split",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "compat-uppercase-extension/compat-uppercase-extension.php": {
+                "name": "Fixture: compat-uppercase-extension",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "crlf/crlf.php": {
+                "name": "Fixture: crlf",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "filters/filters.php": {
+                "name": "Fixture: filters",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "no-final-newline/no-final-newline.php": {
+                "name": "Fixture: no-final-newline",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "non-php/non-php.php": {
+                "name": "Fixture: non-PHP file",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "safe-strings/safe-strings.php": {
+                "name": "Fixture: safe strings",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "search-terms/search-terms.php": {
+                "name": "Fixture: search terms",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "single-file.php": {
+                "name": "Fixture: single-file",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "single-file-with-folder.php": {
+                "name": "Fixture: single-file-with-folder",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": true
+            },
+            "snippet-edges/snippet-edges.php": {
+                "name": "Fixture: snippet-edges",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            },
+            "uppercase-extension/uppercase-extension.php": {
+                "name": "Fixture: uppercase-extension",
+                "version": "1.0.0",
+                "author": "Fixture",
+                "compatible": false
+            }
+        },
+        "cache_status": "cached",
+        "last_updated": "<datetime>"
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": false,
+        "issues": {
+            "/uppercase-extension/sample.PHP": [
+                {
+                    "file": "/uppercase-extension/sample.PHP",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 3,
+                    "snippet": "1: &lt;?php\n     2: function hpos_fixture_uppercase_extension() {\n>    3: \t$a = '/wc/v1/orders';\n     4: }",
+                    "code": "\t$a = '/wc/v1/orders';",
+                    "context": {
+                        "before": "<?php\nfunction hpos_fixture_uppercase_extension() {",
+                        "after": ""
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": false,
+        "issues": {
+            "/comment-rule/comment-rule.php": [
+                {
+                    "file": "/comment-rule/comment-rule.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 15,
+                    "snippet": "12: \t/*\n    13: \t * $a = &#039;/wc/v1/orders&#039;;\n    14: \t */\n>   15: \t# $a = &#039;/wc/v1/orders&#039;;\n    16: \t$a = 1; // &#039;/wc/v1/orders&#039;\n    17: \t$b = 2 * 3; // &#039;/wc/v1/orders&#039;\n    18: }",
+                    "code": "\t# $a = &#039;/wc/v1/orders&#039;;",
+                    "context": {
+                        "before": "\t// $a = '/wc/v1/orders';\n\t/*\n\t * $a = '/wc/v1/orders';\n\t */",
+                        "after": "\t$a = 1; // '/wc/v1/orders'\n\t$b = 2 * 3; // '/wc/v1/orders'"
+                    }
+                },
+                {
+                    "file": "/comment-rule/comment-rule.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 16,
+                    "snippet": "13: \t * $a = &#039;/wc/v1/orders&#039;;\n    14: \t */\n    15: \t# $a = &#039;/wc/v1/orders&#039;;\n>   16: \t$a = 1; // &#039;/wc/v1/orders&#039;\n    17: \t$b = 2 * 3; // &#039;/wc/v1/orders&#039;\n    18: }",
+                    "code": "\t$a = 1; // &#039;/wc/v1/orders&#039;",
+                    "context": {
+                        "before": "\t/*\n\t * $a = '/wc/v1/orders';\n\t */\n\t# $a = '/wc/v1/orders';",
+                        "after": "\t$b = 2 * 3; // '/wc/v1/orders'"
+                    }
+                },
+                {
+                    "file": "/comment-rule/comment-rule.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 17,
+                    "snippet": "14: \t */\n    15: \t# $a = &#039;/wc/v1/orders&#039;;\n    16: \t$a = 1; // &#039;/wc/v1/orders&#039;\n>   17: \t$b = 2 * 3; // &#039;/wc/v1/orders&#039;\n    18: }",
+                    "code": "\t$b = 2 * 3; // &#039;/wc/v1/orders&#039;",
+                    "context": {
+                        "before": "\t * $a = '/wc/v1/orders';\n\t */\n\t# $a = '/wc/v1/orders';\n\t$a = 1; // '/wc/v1/orders'",
+                        "after": ""
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -12,7 +12,8 @@
     "rimraf": "^6.0.1",
     "sass": "^1.89.1",
     "stylelint": "^16.3.0",
-    "eslint": "^8.57.0"
+    "eslint": "^8.57.0",
+    "@wordpress/env": "10.3.0"
   },
   "scripts": {
     "build": "npm run clean:vendor && composer install -o --no-dev && npm run build:css && npm run build:js && npm run archive",
@@ -33,7 +34,11 @@
     "bump": "node version-bump.js",
     "bump:major": "node version-bump.js major",
     "wpcs": "composer wpcs",
-    "wpcs:fix": "composer wpcs:fix"
+    "wpcs:fix": "composer wpcs:fix",
+    "env:start": "wp-env start",
+    "env:stop": "wp-env stop",
+    "env:destroy": "wp-env destroy",
+    "env:cli": "wp-env run cli"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,22 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": false,
+        "issues": {
+            "/filters/filters.php": [
+                {
+                    "file": "/filters/filters.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 15,
+                    "snippet": "12: \t$a = &#039;hpos_fixture_plain_term&#039;;\n    13: \t$a = &#039;hpos_fixture_typed_pattern&#039;;\n    14: \t$a = &#039;hpos_fixture_untyped_pattern&#039;;\n>   15: \t$a = $wpdb-&gt;posts; // hpos_fixture_safe_marker\n    16: }",
+                    "code": "\t$a = $wpdb-&gt;posts; // hpos_fixture_safe_marker",
+                    "context": {
+                        "before": "\t$wpdb = null;\n\t$a = 'hpos_fixture_plain_term';\n\t$a = 'hpos_fixture_typed_pattern';\n\t$a = 'hpos_fixture_untyped_pattern';",
+                        "after": ""
+                    }
+                }
+            ]
+        }
+    }
+}

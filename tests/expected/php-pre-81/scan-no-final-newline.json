@@ -1,0 +1,22 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": false,
+        "issues": {
+            "/no-final-newline/no-final-newline.php": [
+                {
+                    "file": "/no-final-newline/no-final-newline.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 11,
+                    "snippet": "8: defined( 'ABSPATH' ) || exit;\n     9: \n    10: function hpos_fixture_no_final_newline() {\n>   11: \t$a = '/wc/v1/orders';\n    12: }",
+                    "code": "\t$a = '/wc/v1/orders';",
+                    "context": {
+                        "before": "\ndefined( 'ABSPATH' ) || exit;\n\nfunction hpos_fixture_no_final_newline() {",
+                        "after": ""
+                    }
+                }
+            ]
+        }
+    }
+}

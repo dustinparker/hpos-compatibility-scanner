@@ -1,0 +1,133 @@
+{
+	"$schema": "tools/infection/vendor/infection/infection/resources/schema.json",
+	source: { directories: [ "src" ] },
+	timeout: 30,
+	// Lets Infection resolve the plugin classes by name, which the ignore lists below rely on.
+	bootstrap: "tools/infection/infection-bootstrap.php",
+	logs: {
+		text: ".infection/infection.log",
+		summary: ".infection/summary.log",
+	},
+	phpUnit: { configDir: ".", customPath: "vendor/bin/phpunit" },
+	mutators: {
+		"@default": true,
+		ArrayItemRemoval: {
+			settings: { remove: "all", limit: 100 },
+			ignore: [
+				// The constructors run while the plugin loads, before coverage starts, so their hook lines always count as uncovered.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::__construct::27",
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::__construct::28",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::__construct::27",
+				// The directory iterator cannot throw here, because the handler has already checked that the folder is readable.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::86",
+				// Only an unreadable plugin folder reaches the message, and the permission tests cannot run inside Infection, see the Permissions note below.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::53",
+				// The patterns are a pre-filter for the condition below it. That condition needs "before_woocommerce_init", or both "FeaturesUtil::declare_compatibility" and "custom_order_tables", so removing any other entry changes nothing.
+				// Infection ignores per line, so this entry also hides the removal of "before_woocommerce_init", which the suite kills.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::235",
+			],
+		},
+		FunctionCallRemoval: {
+			ignore: [
+				// Constructor hook lines, see ArrayItemRemoval above.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::__construct::27",
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::__construct::28",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::__construct::27",
+				// Unreachable catch, see ArrayItemRemoval above.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::86",
+				// Unreadable folder only, see ArrayItemRemoval above.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::53",
+			],
+		},
+		// Permissions note: Infection replaces the file stream wrapper, and the replacement reports a chmod 0000 folder as missing.
+		// The three permission tests skip themselves there, so the lines only they cover are listed in the entries marked "unreadable".
+		CastBool: {
+			ignore: [
+				// The bool return type coerces the cached value, so the cast changes nothing.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::50",
+			],
+		},
+		LogicalOr: {
+			ignore: [
+				// Unreadable folder only: a path that exists and is a folder fails this guard only when it cannot be read.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::52",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::230",
+			],
+		},
+		Break_: {
+			ignore: [
+				// Continuing after a hit can only change the result when a later subfolder is unreadable, which Infection cannot reproduce.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::76",
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::86",
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::95",
+				// A safe pattern marks every match on the line, so scanning the remaining safe patterns changes nothing.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::144",
+			],
+		},
+		LessThan: {
+			ignore: [
+				// When the two sides are equal the slice length is zero, so the context string is empty either way.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::159",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::165",
+			],
+		},
+		Minus: {
+			ignore: [
+				// array_slice() clamps the window to the lines that exist, and a zero-length slice is empty, so an off-by-one bound gives the same context.
+				// Infection ignores per line, so the entry for line 171 also hides the Minus mutant on its trailing "- 1", which the suite kills because it adds a line to the snippet.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::159",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::171",
+			],
+		},
+		DecrementInteger: {
+			ignore: [
+				// Same slice behaviour as Minus above, and the same hidden mutant on the trailing "- 1" of line 171.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::159",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::171",
+			],
+		},
+		Concat: {
+			ignore: [
+				// Unreachable catch, see ArrayItemRemoval above.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::86",
+			],
+		},
+		ConcatOperandRemoval: {
+			ignore: [
+				// Unreachable catch, see ArrayItemRemoval above.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::86",
+			],
+		},
+		FalseValue: {
+			ignore: [
+				// The private check is only called after the handler has checked the folder, so its own guard never fires.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::231",
+				// Unreadable subfolder only: the iterator throws there, see the Permissions note above.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::100",
+				// Unreadable subfolder only. Outside Infection no test can pin it either: the private check catches the exception, then the scan's own walk throws on the same folder and sends no response.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::284",
+			],
+		},
+		ReturnRemoval: {
+			ignore: [
+				// Same guards as FalseValue above.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::231",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::284",
+			],
+		},
+		Continue_: {
+			ignore: [
+				// A safe pattern marks every match on the line, so stopping the term loop after one changes nothing.
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::150",
+				// Lines 64, 96 and 254 skip an unreadable file. No test makes a file unreadable, and Infection's interceptor reports unreadable paths as missing, so these lines are not covered.
+				// Lines 70, 102 and 260 follow a successful is_readable(), so file() and file_get_contents() cannot return false there.
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::64",
+				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::70",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::96",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::102",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::254",
+				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::260",
+			],
+		},
+	},
+}

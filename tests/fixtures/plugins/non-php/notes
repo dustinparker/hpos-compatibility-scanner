@@ -1,0 +1,4 @@
+These lines are not PHP and the scanner must skip them.
+$wpdb->posts
+SELECT * FROM wp_posts
+get_post_meta( $order_id, '_billing_email', true );

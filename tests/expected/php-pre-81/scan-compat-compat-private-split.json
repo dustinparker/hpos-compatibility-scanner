@@ -1,0 +1,8 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": true,
+        "issues": [],
+        "message": "No issues found in the selected plugin."
+    }
+}

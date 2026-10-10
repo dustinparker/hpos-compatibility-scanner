@@ -1,0 +1,7 @@
+{
+    "success": true,
+    "data": {
+        "message": "Compatibility cache refreshed successfully.",
+        "last_updated": "<datetime>"
+    }
+}
