@@ -9,6 +9,9 @@ namespace DPWD\HPOSCompatPlugin\Tests\Integration;
 
 use DPWD\HPOSCompatPlugin\Tests\Support\Ajax_Test_Case;
 use DPWD\HPOSCompatPlugin\Tests\Support\Fixture_Plugins;
+use DPWD\HPOSCompatPlugin\Scanner\Directory_Open_Exception;
+use DPWD\HPOSCompatPlugin\Scanner\Directory_Scanner;
+use DPWD\HPOSCompatPlugin\Scanner\Scanner;
 use UnexpectedValueException;
 use WPAjaxDieContinueException;
 
@@ -206,5 +209,38 @@ final class Scan_Edges_Test extends Ajax_Test_Case {
 			}
 			$_POST = array();
 		}
+	}
+
+	/**
+	 * A folder the scanner cannot open is reported with the scanner's message.
+	 */
+	public function test_error_opening_the_folder_is_reported(): void {
+		$scanner = $this->createStub( Directory_Scanner::class );
+		$scanner->method( 'scan' )->willThrowException( new Directory_Open_Exception( 'probe message' ) );
+
+		remove_all_actions( 'wp_ajax_hpos_scan_plugin' );
+		new Scanner( $scanner );
+
+		$response = $this->scan( 'non-php/non-php.php' );
+
+		$this->assertFalse( $response['success'] );
+		$this->assertSame( array( 'message' => 'Error reading plugin directory: probe message' ), $response['data'] );
+	}
+
+	/**
+	 * A refused request never reaches the scanner the handler was given.
+	 */
+	public function test_refused_user_never_reaches_the_injected_scanner(): void {
+		$scanner = $this->createMock( Directory_Scanner::class );
+		$scanner->expects( $this->never() )->method( 'scan' );
+
+		remove_all_actions( 'wp_ajax_hpos_scan_plugin' );
+		new Scanner( $scanner );
+
+		$response = $this->call( 'hpos_scan_plugin', array( 'plugin' => 'non-php/non-php.php' ), 'subscriber' );
+		$this->assertSame( array( 'message' => 'Unauthorized access.' ), $response['data'] );
+
+		$response = $this->call( 'hpos_scan_plugin', array( 'plugin' => 'non-php/non-php.php' ), 'administrator', 'other_action' );
+		$this->assertSame( array( 'message' => 'Unauthorized access.' ), $response['data'] );
 	}
 }
