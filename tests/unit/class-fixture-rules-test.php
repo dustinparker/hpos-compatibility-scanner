@@ -97,4 +97,31 @@ final class Fixture_Rules_Test extends TestCase {
 		$this->assertNotSame( '', $contents );
 		$this->assertStringEndsNotWith( "\n", $contents );
 	}
+
+	/**
+	 * Every top-level fixture is mapped into the wp-env site, and every mapping has a fixture.
+	 */
+	public function test_every_fixture_has_a_mapping_and_every_mapping_a_fixture(): void {
+		$expected = array();
+
+		foreach ( scandir( Fixture_Plugins::source() ) as $name ) {
+			if ( '.' === $name || '..' === $name ) {
+				continue;
+			}
+
+			$expected[ 'wp-content/plugins/' . $name ] = './tests/fixtures/plugins/' . $name;
+		}
+
+		$config = json_decode( file_get_contents( dirname( __DIR__, 2 ) . '/.wp-env.json' ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local file.
+
+		$this->assertIsArray( $config );
+		$this->assertArrayHasKey( 'mappings', $config );
+
+		$actual = $config['mappings'];
+
+		ksort( $expected );
+		ksort( $actual );
+
+		$this->assertSame( $expected, $actual );
+	}
 }
