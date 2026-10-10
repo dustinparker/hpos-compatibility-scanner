@@ -1,0 +1,66 @@
+name: Checks
+
+# `pull_request` runs with a read-only token and no secrets, including for
+# Dependabot and forks. Do not change this to `pull_request_target`.
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  standards:
+    name: Coding standards and static analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Check coding standards
+        run: composer wpcs
+
+      - name: Run static analysis
+        run: composer phpstan
+
+  syntax:
+    name: PHP 7.4 syntax
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: '7.4'
+          coverage: none
+
+      # The plugin supports PHP 7.4, so its own files must parse there.
+      - name: Check that every plugin file parses
+        run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n 1 php -l
