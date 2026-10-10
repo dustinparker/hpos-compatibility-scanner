@@ -1,0 +1,622 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": false,
+        "issues": {
+            "/safe-strings/safe-strings.php": [
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 13,
+                    "snippet": "10: function hpos_fixture_safe_strings() {\n    11: \t$wpdb = null;\n    12: \t$a = $wpdb-&gt;posts; // wc_get_order\n>   13: \t$a = $wpdb-&gt;posts;\n    14: \t$a = $wpdb-&gt;posts; // wc_update_order\n    15: \t$a = $wpdb-&gt;posts;\n    16: \t$a = $wpdb-&gt;posts; // wc_delete_order",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\nfunction hpos_fixture_safe_strings() {\n\t$wpdb = null;\n\t$a = $wpdb->posts; // wc_get_order",
+                        "after": "\t$a = $wpdb->posts; // wc_update_order\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_delete_order\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_orders"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 15,
+                    "snippet": "12: \t$a = $wpdb-&gt;posts; // wc_get_order\n    13: \t$a = $wpdb-&gt;posts;\n    14: \t$a = $wpdb-&gt;posts; // wc_update_order\n>   15: \t$a = $wpdb-&gt;posts;\n    16: \t$a = $wpdb-&gt;posts; // wc_delete_order\n    17: \t$a = $wpdb-&gt;posts;\n    18: \t$a = $wpdb-&gt;posts; // wc_get_orders",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$wpdb = null;\n\t$a = $wpdb->posts; // wc_get_order\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_update_order",
+                        "after": "\t$a = $wpdb->posts; // wc_delete_order\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_orders\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_id_by_order_key"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 17,
+                    "snippet": "14: \t$a = $wpdb-&gt;posts; // wc_update_order\n    15: \t$a = $wpdb-&gt;posts;\n    16: \t$a = $wpdb-&gt;posts; // wc_delete_order\n>   17: \t$a = $wpdb-&gt;posts;\n    18: \t$a = $wpdb-&gt;posts; // wc_get_orders\n    19: \t$a = $wpdb-&gt;posts;\n    20: \t$a = $wpdb-&gt;posts; // wc_get_order_id_by_order_key",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_update_order\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_delete_order",
+                        "after": "\t$a = $wpdb->posts; // wc_get_orders\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_id_by_order_key\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_types"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 19,
+                    "snippet": "16: \t$a = $wpdb-&gt;posts; // wc_delete_order\n    17: \t$a = $wpdb-&gt;posts;\n    18: \t$a = $wpdb-&gt;posts; // wc_get_orders\n>   19: \t$a = $wpdb-&gt;posts;\n    20: \t$a = $wpdb-&gt;posts; // wc_get_order_id_by_order_key\n    21: \t$a = $wpdb-&gt;posts;\n    22: \t$a = $wpdb-&gt;posts; // wc_get_order_types",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_delete_order\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_orders",
+                        "after": "\t$a = $wpdb->posts; // wc_get_order_id_by_order_key\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_types\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_statuses"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 21,
+                    "snippet": "18: \t$a = $wpdb-&gt;posts; // wc_get_orders\n    19: \t$a = $wpdb-&gt;posts;\n    20: \t$a = $wpdb-&gt;posts; // wc_get_order_id_by_order_key\n>   21: \t$a = $wpdb-&gt;posts;\n    22: \t$a = $wpdb-&gt;posts; // wc_get_order_types\n    23: \t$a = $wpdb-&gt;posts;\n    24: \t$a = $wpdb-&gt;posts; // wc_get_order_statuses",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_orders\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_id_by_order_key",
+                        "after": "\t$a = $wpdb->posts; // wc_get_order_types\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_statuses\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // WC_Order_Data_Store_CPT"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 23,
+                    "snippet": "20: \t$a = $wpdb-&gt;posts; // wc_get_order_id_by_order_key\n    21: \t$a = $wpdb-&gt;posts;\n    22: \t$a = $wpdb-&gt;posts; // wc_get_order_types\n>   23: \t$a = $wpdb-&gt;posts;\n    24: \t$a = $wpdb-&gt;posts; // wc_get_order_statuses\n    25: \t$a = $wpdb-&gt;posts;\n    26: \t$a = $wpdb-&gt;posts; // WC_Order_Data_Store_CPT",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_id_by_order_key\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_types",
+                        "after": "\t$a = $wpdb->posts; // wc_get_order_statuses\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // WC_Order_Data_Store_CPT\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // WC_Order_Data_Store_Custom_Table"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 25,
+                    "snippet": "22: \t$a = $wpdb-&gt;posts; // wc_get_order_types\n    23: \t$a = $wpdb-&gt;posts;\n    24: \t$a = $wpdb-&gt;posts; // wc_get_order_statuses\n>   25: \t$a = $wpdb-&gt;posts;\n    26: \t$a = $wpdb-&gt;posts; // WC_Order_Data_Store_CPT\n    27: \t$a = $wpdb-&gt;posts;\n    28: \t$a = $wpdb-&gt;posts; // WC_Order_Data_Store_Custom_Table",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_types\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_statuses",
+                        "after": "\t$a = $wpdb->posts; // WC_Order_Data_Store_CPT\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // WC_Order_Data_Store_Custom_Table\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wp_posts"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 27,
+                    "snippet": "24: \t$a = $wpdb-&gt;posts; // wc_get_order_statuses\n    25: \t$a = $wpdb-&gt;posts;\n    26: \t$a = $wpdb-&gt;posts; // WC_Order_Data_Store_CPT\n>   27: \t$a = $wpdb-&gt;posts;\n    28: \t$a = $wpdb-&gt;posts; // WC_Order_Data_Store_Custom_Table\n    29: \t$a = $wpdb-&gt;posts;\n    30: \t$a = $wpdb-&gt;posts; // wp_posts",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wc_get_order_statuses\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // WC_Order_Data_Store_CPT",
+                        "after": "\t$a = $wpdb->posts; // WC_Order_Data_Store_Custom_Table\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wp_posts\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wp_postmeta"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 29,
+                    "snippet": "26: \t$a = $wpdb-&gt;posts; // WC_Order_Data_Store_CPT\n    27: \t$a = $wpdb-&gt;posts;\n    28: \t$a = $wpdb-&gt;posts; // WC_Order_Data_Store_Custom_Table\n>   29: \t$a = $wpdb-&gt;posts;\n    30: \t$a = $wpdb-&gt;posts; // wp_posts\n    31: \t$a = $wpdb-&gt;posts;\n    32: \t$a = $wpdb-&gt;posts; // wp_postmeta",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // WC_Order_Data_Store_CPT\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // WC_Order_Data_Store_Custom_Table",
+                        "after": "\t$a = $wpdb->posts; // wp_posts\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wp_postmeta\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* wp_posts */"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 31,
+                    "snippet": "28: \t$a = $wpdb-&gt;posts; // WC_Order_Data_Store_Custom_Table\n    29: \t$a = $wpdb-&gt;posts;\n    30: \t$a = $wpdb-&gt;posts; // wp_posts\n>   31: \t$a = $wpdb-&gt;posts;\n    32: \t$a = $wpdb-&gt;posts; // wp_postmeta\n    33: \t$a = $wpdb-&gt;posts;\n    34: \t$a = $wpdb-&gt;posts; /* wp_posts */",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // WC_Order_Data_Store_Custom_Table\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wp_posts",
+                        "after": "\t$a = $wpdb->posts; // wp_postmeta\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* wp_posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* wp_postmeta */"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 33,
+                    "snippet": "30: \t$a = $wpdb-&gt;posts; // wp_posts\n    31: \t$a = $wpdb-&gt;posts;\n    32: \t$a = $wpdb-&gt;posts; // wp_postmeta\n>   33: \t$a = $wpdb-&gt;posts;\n    34: \t$a = $wpdb-&gt;posts; /* wp_posts */\n    35: \t$a = $wpdb-&gt;posts;\n    36: \t$a = $wpdb-&gt;posts; /* wp_postmeta */",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wp_posts\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wp_postmeta",
+                        "after": "\t$a = $wpdb->posts; /* wp_posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* wp_postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * wp_posts */"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 35,
+                    "snippet": "32: \t$a = $wpdb-&gt;posts; // wp_postmeta\n    33: \t$a = $wpdb-&gt;posts;\n    34: \t$a = $wpdb-&gt;posts; /* wp_posts */\n>   35: \t$a = $wpdb-&gt;posts;\n    36: \t$a = $wpdb-&gt;posts; /* wp_postmeta */\n    37: \t$a = $wpdb-&gt;posts;\n    38: \t$a = $wpdb-&gt;posts; /** * wp_posts */",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // wp_postmeta\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* wp_posts */",
+                        "after": "\t$a = $wpdb->posts; /* wp_postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * wp_posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * wp_postmeta */"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 37,
+                    "snippet": "34: \t$a = $wpdb-&gt;posts; /* wp_posts */\n    35: \t$a = $wpdb-&gt;posts;\n    36: \t$a = $wpdb-&gt;posts; /* wp_postmeta */\n>   37: \t$a = $wpdb-&gt;posts;\n    38: \t$a = $wpdb-&gt;posts; /** * wp_posts */\n    39: \t$a = $wpdb-&gt;posts;\n    40: \t$a = $wpdb-&gt;posts; /** * wp_postmeta */",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* wp_posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* wp_postmeta */",
+                        "after": "\t$a = $wpdb->posts; /** * wp_posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * wp_postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // $wpdb->posts"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 39,
+                    "snippet": "36: \t$a = $wpdb-&gt;posts; /* wp_postmeta */\n    37: \t$a = $wpdb-&gt;posts;\n    38: \t$a = $wpdb-&gt;posts; /** * wp_posts */\n>   39: \t$a = $wpdb-&gt;posts;\n    40: \t$a = $wpdb-&gt;posts; /** * wp_postmeta */\n    41: \t$a = $wpdb-&gt;posts;\n    42: \t$a = $wpdb-&gt;posts; // $wpdb-&gt;posts",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* wp_postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * wp_posts */",
+                        "after": "\t$a = $wpdb->posts; /** * wp_postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // $wpdb->posts\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // $wpdb->postmeta"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 41,
+                    "snippet": "38: \t$a = $wpdb-&gt;posts; /** * wp_posts */\n    39: \t$a = $wpdb-&gt;posts;\n    40: \t$a = $wpdb-&gt;posts; /** * wp_postmeta */\n>   41: \t$a = $wpdb-&gt;posts;\n    42: \t$a = $wpdb-&gt;posts; // $wpdb-&gt;posts\n    43: \t$a = $wpdb-&gt;posts;\n    44: \t$a = $wpdb-&gt;posts; // $wpdb-&gt;postmeta",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * wp_posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * wp_postmeta */",
+                        "after": "\t$a = $wpdb->posts; // $wpdb->posts\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // $wpdb->postmeta\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* $wpdb->posts */"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 43,
+                    "snippet": "40: \t$a = $wpdb-&gt;posts; /** * wp_postmeta */\n    41: \t$a = $wpdb-&gt;posts;\n    42: \t$a = $wpdb-&gt;posts; // $wpdb-&gt;posts\n>   43: \t$a = $wpdb-&gt;posts;\n    44: \t$a = $wpdb-&gt;posts; // $wpdb-&gt;postmeta\n    45: \t$a = $wpdb-&gt;posts;\n    46: \t$a = $wpdb-&gt;posts; /* $wpdb-&gt;posts */",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * wp_postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // $wpdb->posts",
+                        "after": "\t$a = $wpdb->posts; // $wpdb->postmeta\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* $wpdb->posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* $wpdb->postmeta */"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 45,
+                    "snippet": "42: \t$a = $wpdb-&gt;posts; // $wpdb-&gt;posts\n    43: \t$a = $wpdb-&gt;posts;\n    44: \t$a = $wpdb-&gt;posts; // $wpdb-&gt;postmeta\n>   45: \t$a = $wpdb-&gt;posts;\n    46: \t$a = $wpdb-&gt;posts; /* $wpdb-&gt;posts */\n    47: \t$a = $wpdb-&gt;posts;\n    48: \t$a = $wpdb-&gt;posts; /* $wpdb-&gt;postmeta */",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // $wpdb->posts\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // $wpdb->postmeta",
+                        "after": "\t$a = $wpdb->posts; /* $wpdb->posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* $wpdb->postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * $wpdb->posts */"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 47,
+                    "snippet": "44: \t$a = $wpdb-&gt;posts; // $wpdb-&gt;postmeta\n    45: \t$a = $wpdb-&gt;posts;\n    46: \t$a = $wpdb-&gt;posts; /* $wpdb-&gt;posts */\n>   47: \t$a = $wpdb-&gt;posts;\n    48: \t$a = $wpdb-&gt;posts; /* $wpdb-&gt;postmeta */\n    49: \t$a = $wpdb-&gt;posts;\n    50: \t$a = $wpdb-&gt;posts; /** * $wpdb-&gt;posts */",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // $wpdb->postmeta\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* $wpdb->posts */",
+                        "after": "\t$a = $wpdb->posts; /* $wpdb->postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * $wpdb->posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * $wpdb->postmeta */"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 49,
+                    "snippet": "46: \t$a = $wpdb-&gt;posts; /* $wpdb-&gt;posts */\n    47: \t$a = $wpdb-&gt;posts;\n    48: \t$a = $wpdb-&gt;posts; /* $wpdb-&gt;postmeta */\n>   49: \t$a = $wpdb-&gt;posts;\n    50: \t$a = $wpdb-&gt;posts; /** * $wpdb-&gt;posts */\n    51: \t$a = $wpdb-&gt;posts;\n    52: \t$a = $wpdb-&gt;posts; /** * $wpdb-&gt;postmeta */",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* $wpdb->posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* $wpdb->postmeta */",
+                        "after": "\t$a = $wpdb->posts; /** * $wpdb->posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * $wpdb->postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @param"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 51,
+                    "snippet": "48: \t$a = $wpdb-&gt;posts; /* $wpdb-&gt;postmeta */\n    49: \t$a = $wpdb-&gt;posts;\n    50: \t$a = $wpdb-&gt;posts; /** * $wpdb-&gt;posts */\n>   51: \t$a = $wpdb-&gt;posts;\n    52: \t$a = $wpdb-&gt;posts; /** * $wpdb-&gt;postmeta */\n    53: \t$a = $wpdb-&gt;posts;\n    54: \t$a = $wpdb-&gt;posts; // @param",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /* $wpdb->postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * $wpdb->posts */",
+                        "after": "\t$a = $wpdb->posts; /** * $wpdb->postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @param\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @return"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 53,
+                    "snippet": "50: \t$a = $wpdb-&gt;posts; /** * $wpdb-&gt;posts */\n    51: \t$a = $wpdb-&gt;posts;\n    52: \t$a = $wpdb-&gt;posts; /** * $wpdb-&gt;postmeta */\n>   53: \t$a = $wpdb-&gt;posts;\n    54: \t$a = $wpdb-&gt;posts; // @param\n    55: \t$a = $wpdb-&gt;posts;\n    56: \t$a = $wpdb-&gt;posts; // @return",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * $wpdb->posts */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * $wpdb->postmeta */",
+                        "after": "\t$a = $wpdb->posts; // @param\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @return\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @var"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 55,
+                    "snippet": "52: \t$a = $wpdb-&gt;posts; /** * $wpdb-&gt;postmeta */\n    53: \t$a = $wpdb-&gt;posts;\n    54: \t$a = $wpdb-&gt;posts; // @param\n>   55: \t$a = $wpdb-&gt;posts;\n    56: \t$a = $wpdb-&gt;posts; // @return\n    57: \t$a = $wpdb-&gt;posts;\n    58: \t$a = $wpdb-&gt;posts; // @var",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; /** * $wpdb->postmeta */\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @param",
+                        "after": "\t$a = $wpdb->posts; // @return\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @var\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @since"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 57,
+                    "snippet": "54: \t$a = $wpdb-&gt;posts; // @param\n    55: \t$a = $wpdb-&gt;posts;\n    56: \t$a = $wpdb-&gt;posts; // @return\n>   57: \t$a = $wpdb-&gt;posts;\n    58: \t$a = $wpdb-&gt;posts; // @var\n    59: \t$a = $wpdb-&gt;posts;\n    60: \t$a = $wpdb-&gt;posts; // @since",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @param\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @return",
+                        "after": "\t$a = $wpdb->posts; // @var\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @since\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // Example:"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 59,
+                    "snippet": "56: \t$a = $wpdb-&gt;posts; // @return\n    57: \t$a = $wpdb-&gt;posts;\n    58: \t$a = $wpdb-&gt;posts; // @var\n>   59: \t$a = $wpdb-&gt;posts;\n    60: \t$a = $wpdb-&gt;posts; // @since\n    61: \t$a = $wpdb-&gt;posts;\n    62: \t$a = $wpdb-&gt;posts; // Example:",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @return\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @var",
+                        "after": "\t$a = $wpdb->posts; // @since\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // Example:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // example:"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 61,
+                    "snippet": "58: \t$a = $wpdb-&gt;posts; // @var\n    59: \t$a = $wpdb-&gt;posts;\n    60: \t$a = $wpdb-&gt;posts; // @since\n>   61: \t$a = $wpdb-&gt;posts;\n    62: \t$a = $wpdb-&gt;posts; // Example:\n    63: \t$a = $wpdb-&gt;posts;\n    64: \t$a = $wpdb-&gt;posts; // example:",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @var\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @since",
+                        "after": "\t$a = $wpdb->posts; // Example:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // example:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // Example query:"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 63,
+                    "snippet": "60: \t$a = $wpdb-&gt;posts; // @since\n    61: \t$a = $wpdb-&gt;posts;\n    62: \t$a = $wpdb-&gt;posts; // Example:\n>   63: \t$a = $wpdb-&gt;posts;\n    64: \t$a = $wpdb-&gt;posts; // example:\n    65: \t$a = $wpdb-&gt;posts;\n    66: \t$a = $wpdb-&gt;posts; // Example query:",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // @since\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // Example:",
+                        "after": "\t$a = $wpdb->posts; // example:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // Example query:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // example query:"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 65,
+                    "snippet": "62: \t$a = $wpdb-&gt;posts; // Example:\n    63: \t$a = $wpdb-&gt;posts;\n    64: \t$a = $wpdb-&gt;posts; // example:\n>   65: \t$a = $wpdb-&gt;posts;\n    66: \t$a = $wpdb-&gt;posts; // Example query:\n    67: \t$a = $wpdb-&gt;posts;\n    68: \t$a = $wpdb-&gt;posts; // example query:",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // Example:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // example:",
+                        "after": "\t$a = $wpdb->posts; // Example query:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // example query:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // function"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 67,
+                    "snippet": "64: \t$a = $wpdb-&gt;posts; // example:\n    65: \t$a = $wpdb-&gt;posts;\n    66: \t$a = $wpdb-&gt;posts; // Example query:\n>   67: \t$a = $wpdb-&gt;posts;\n    68: \t$a = $wpdb-&gt;posts; // example query:\n    69: \t$a = $wpdb-&gt;posts;\n    70: \t$a = $wpdb-&gt;posts; // function",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // example:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // Example query:",
+                        "after": "\t$a = $wpdb->posts; // example query:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // function\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // class"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 69,
+                    "snippet": "66: \t$a = $wpdb-&gt;posts; // Example query:\n    67: \t$a = $wpdb-&gt;posts;\n    68: \t$a = $wpdb-&gt;posts; // example query:\n>   69: \t$a = $wpdb-&gt;posts;\n    70: \t$a = $wpdb-&gt;posts; // function\n    71: \t$a = $wpdb-&gt;posts;\n    72: \t$a = $wpdb-&gt;posts; // class",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // Example query:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // example query:",
+                        "after": "\t$a = $wpdb->posts; // function\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // class\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // interface"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 71,
+                    "snippet": "68: \t$a = $wpdb-&gt;posts; // example query:\n    69: \t$a = $wpdb-&gt;posts;\n    70: \t$a = $wpdb-&gt;posts; // function\n>   71: \t$a = $wpdb-&gt;posts;\n    72: \t$a = $wpdb-&gt;posts; // class\n    73: \t$a = $wpdb-&gt;posts;\n    74: \t$a = $wpdb-&gt;posts; // interface",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // example query:\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // function",
+                        "after": "\t$a = $wpdb->posts; // class\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // interface\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // trait"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 73,
+                    "snippet": "70: \t$a = $wpdb-&gt;posts; // function\n    71: \t$a = $wpdb-&gt;posts;\n    72: \t$a = $wpdb-&gt;posts; // class\n>   73: \t$a = $wpdb-&gt;posts;\n    74: \t$a = $wpdb-&gt;posts; // interface\n    75: \t$a = $wpdb-&gt;posts;\n    76: \t$a = $wpdb-&gt;posts; // trait",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // function\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // class",
+                        "after": "\t$a = $wpdb->posts; // interface\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // trait\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // abstract"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 75,
+                    "snippet": "72: \t$a = $wpdb-&gt;posts; // class\n    73: \t$a = $wpdb-&gt;posts;\n    74: \t$a = $wpdb-&gt;posts; // interface\n>   75: \t$a = $wpdb-&gt;posts;\n    76: \t$a = $wpdb-&gt;posts; // trait\n    77: \t$a = $wpdb-&gt;posts;\n    78: \t$a = $wpdb-&gt;posts; // abstract",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // class\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // interface",
+                        "after": "\t$a = $wpdb->posts; // trait\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // abstract\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // extends"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 77,
+                    "snippet": "74: \t$a = $wpdb-&gt;posts; // interface\n    75: \t$a = $wpdb-&gt;posts;\n    76: \t$a = $wpdb-&gt;posts; // trait\n>   77: \t$a = $wpdb-&gt;posts;\n    78: \t$a = $wpdb-&gt;posts; // abstract\n    79: \t$a = $wpdb-&gt;posts;\n    80: \t$a = $wpdb-&gt;posts; // extends",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // interface\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // trait",
+                        "after": "\t$a = $wpdb->posts; // abstract\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // extends\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // implements"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 79,
+                    "snippet": "76: \t$a = $wpdb-&gt;posts; // trait\n    77: \t$a = $wpdb-&gt;posts;\n    78: \t$a = $wpdb-&gt;posts; // abstract\n>   79: \t$a = $wpdb-&gt;posts;\n    80: \t$a = $wpdb-&gt;posts; // extends\n    81: \t$a = $wpdb-&gt;posts;\n    82: \t$a = $wpdb-&gt;posts; // implements",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // trait\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // abstract",
+                        "after": "\t$a = $wpdb->posts; // extends\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // implements\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'product'"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 81,
+                    "snippet": "78: \t$a = $wpdb-&gt;posts; // abstract\n    79: \t$a = $wpdb-&gt;posts;\n    80: \t$a = $wpdb-&gt;posts; // extends\n>   81: \t$a = $wpdb-&gt;posts;\n    82: \t$a = $wpdb-&gt;posts; // implements\n    83: \t$a = $wpdb-&gt;posts;\n    84: \t$a = $wpdb-&gt;posts; // post_type = 'product'",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // abstract\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // extends",
+                        "after": "\t$a = $wpdb->posts; // implements\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'product'\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"product\""
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 83,
+                    "snippet": "80: \t$a = $wpdb-&gt;posts; // extends\n    81: \t$a = $wpdb-&gt;posts;\n    82: \t$a = $wpdb-&gt;posts; // implements\n>   83: \t$a = $wpdb-&gt;posts;\n    84: \t$a = $wpdb-&gt;posts; // post_type = 'product'\n    85: \t$a = $wpdb-&gt;posts;\n    86: \t$a = $wpdb-&gt;posts; // post_type = &quot;product&quot;",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // extends\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // implements",
+                        "after": "\t$a = $wpdb->posts; // post_type = 'product'\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"product\"\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'page'"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 85,
+                    "snippet": "82: \t$a = $wpdb-&gt;posts; // implements\n    83: \t$a = $wpdb-&gt;posts;\n    84: \t$a = $wpdb-&gt;posts; // post_type = 'product'\n>   85: \t$a = $wpdb-&gt;posts;\n    86: \t$a = $wpdb-&gt;posts; // post_type = &quot;product&quot;\n    87: \t$a = $wpdb-&gt;posts;\n    88: \t$a = $wpdb-&gt;posts; // post_type = 'page'",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // implements\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'product'",
+                        "after": "\t$a = $wpdb->posts; // post_type = \"product\"\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'page'\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"page\""
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 87,
+                    "snippet": "84: \t$a = $wpdb-&gt;posts; // post_type = 'product'\n    85: \t$a = $wpdb-&gt;posts;\n    86: \t$a = $wpdb-&gt;posts; // post_type = &quot;product&quot;\n>   87: \t$a = $wpdb-&gt;posts;\n    88: \t$a = $wpdb-&gt;posts; // post_type = 'page'\n    89: \t$a = $wpdb-&gt;posts;\n    90: \t$a = $wpdb-&gt;posts; // post_type = &quot;page&quot;",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'product'\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"product\"",
+                        "after": "\t$a = $wpdb->posts; // post_type = 'page'\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"page\"\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'post'"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 89,
+                    "snippet": "86: \t$a = $wpdb-&gt;posts; // post_type = &quot;product&quot;\n    87: \t$a = $wpdb-&gt;posts;\n    88: \t$a = $wpdb-&gt;posts; // post_type = 'page'\n>   89: \t$a = $wpdb-&gt;posts;\n    90: \t$a = $wpdb-&gt;posts; // post_type = &quot;page&quot;\n    91: \t$a = $wpdb-&gt;posts;\n    92: \t$a = $wpdb-&gt;posts; // post_type = 'post'",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"product\"\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'page'",
+                        "after": "\t$a = $wpdb->posts; // post_type = \"page\"\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'post'\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"post\""
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 91,
+                    "snippet": "88: \t$a = $wpdb-&gt;posts; // post_type = 'page'\n    89: \t$a = $wpdb-&gt;posts;\n    90: \t$a = $wpdb-&gt;posts; // post_type = &quot;page&quot;\n>   91: \t$a = $wpdb-&gt;posts;\n    92: \t$a = $wpdb-&gt;posts; // post_type = 'post'\n    93: \t$a = $wpdb-&gt;posts;\n    94: \t$a = $wpdb-&gt;posts; // post_type = &quot;post&quot;",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'page'\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"page\"",
+                        "after": "\t$a = $wpdb->posts; // post_type = 'post'\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"post\"\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // CREATE TABLE"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 93,
+                    "snippet": "90: \t$a = $wpdb-&gt;posts; // post_type = &quot;page&quot;\n    91: \t$a = $wpdb-&gt;posts;\n    92: \t$a = $wpdb-&gt;posts; // post_type = 'post'\n>   93: \t$a = $wpdb-&gt;posts;\n    94: \t$a = $wpdb-&gt;posts; // post_type = &quot;post&quot;\n    95: \t$a = $wpdb-&gt;posts;\n    96: \t$a = $wpdb-&gt;posts; // CREATE TABLE",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"page\"\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'post'",
+                        "after": "\t$a = $wpdb->posts; // post_type = \"post\"\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // CREATE TABLE\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // ALTER TABLE"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 95,
+                    "snippet": "92: \t$a = $wpdb-&gt;posts; // post_type = 'post'\n    93: \t$a = $wpdb-&gt;posts;\n    94: \t$a = $wpdb-&gt;posts; // post_type = &quot;post&quot;\n>   95: \t$a = $wpdb-&gt;posts;\n    96: \t$a = $wpdb-&gt;posts; // CREATE TABLE\n    97: \t$a = $wpdb-&gt;posts;\n    98: \t$a = $wpdb-&gt;posts; // ALTER TABLE",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = 'post'\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"post\"",
+                        "after": "\t$a = $wpdb->posts; // CREATE TABLE\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // ALTER TABLE\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // DROP TABLE"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 97,
+                    "snippet": "94: \t$a = $wpdb-&gt;posts; // post_type = &quot;post&quot;\n    95: \t$a = $wpdb-&gt;posts;\n    96: \t$a = $wpdb-&gt;posts; // CREATE TABLE\n>   97: \t$a = $wpdb-&gt;posts;\n    98: \t$a = $wpdb-&gt;posts; // ALTER TABLE\n    99: \t$a = $wpdb-&gt;posts;\n   100: \t$a = $wpdb-&gt;posts; // DROP TABLE",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // post_type = \"post\"\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // CREATE TABLE",
+                        "after": "\t$a = $wpdb->posts; // ALTER TABLE\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // DROP TABLE\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // dbDelta"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 99,
+                    "snippet": "96: \t$a = $wpdb-&gt;posts; // CREATE TABLE\n    97: \t$a = $wpdb-&gt;posts;\n    98: \t$a = $wpdb-&gt;posts; // ALTER TABLE\n>   99: \t$a = $wpdb-&gt;posts;\n   100: \t$a = $wpdb-&gt;posts; // DROP TABLE\n   101: \t$a = $wpdb-&gt;posts;\n   102: \t$a = $wpdb-&gt;posts; // dbDelta",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // CREATE TABLE\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // ALTER TABLE",
+                        "after": "\t$a = $wpdb->posts; // DROP TABLE\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // dbDelta\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // test_"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 101,
+                    "snippet": "98: \t$a = $wpdb-&gt;posts; // ALTER TABLE\n    99: \t$a = $wpdb-&gt;posts;\n   100: \t$a = $wpdb-&gt;posts; // DROP TABLE\n>  101: \t$a = $wpdb-&gt;posts;\n   102: \t$a = $wpdb-&gt;posts; // dbDelta\n   103: \t$a = $wpdb-&gt;posts;\n   104: \t$a = $wpdb-&gt;posts; // test_",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // ALTER TABLE\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // DROP TABLE",
+                        "after": "\t$a = $wpdb->posts; // dbDelta\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // test_\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // debug_"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 103,
+                    "snippet": "100: \t$a = $wpdb-&gt;posts; // DROP TABLE\n   101: \t$a = $wpdb-&gt;posts;\n   102: \t$a = $wpdb-&gt;posts; // dbDelta\n>  103: \t$a = $wpdb-&gt;posts;\n   104: \t$a = $wpdb-&gt;posts; // test_\n   105: \t$a = $wpdb-&gt;posts;\n   106: \t$a = $wpdb-&gt;posts; // debug_",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // DROP TABLE\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // dbDelta",
+                        "after": "\t$a = $wpdb->posts; // test_\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // debug_\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // is_admin()"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 105,
+                    "snippet": "102: \t$a = $wpdb-&gt;posts; // dbDelta\n   103: \t$a = $wpdb-&gt;posts;\n   104: \t$a = $wpdb-&gt;posts; // test_\n>  105: \t$a = $wpdb-&gt;posts;\n   106: \t$a = $wpdb-&gt;posts; // debug_\n   107: \t$a = $wpdb-&gt;posts;\n   108: \t$a = $wpdb-&gt;posts; // is_admin()",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // dbDelta\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // test_",
+                        "after": "\t$a = $wpdb->posts; // debug_\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // is_admin()\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // if ( is_admin() )"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 107,
+                    "snippet": "104: \t$a = $wpdb-&gt;posts; // test_\n   105: \t$a = $wpdb-&gt;posts;\n   106: \t$a = $wpdb-&gt;posts; // debug_\n>  107: \t$a = $wpdb-&gt;posts;\n   108: \t$a = $wpdb-&gt;posts; // is_admin()\n   109: \t$a = $wpdb-&gt;posts;\n   110: \t$a = $wpdb-&gt;posts; // if ( is_admin() )",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // test_\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // debug_",
+                        "after": "\t$a = $wpdb->posts; // is_admin()\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // if ( is_admin() )\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // if (is_admin())"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 109,
+                    "snippet": "106: \t$a = $wpdb-&gt;posts; // debug_\n   107: \t$a = $wpdb-&gt;posts;\n   108: \t$a = $wpdb-&gt;posts; // is_admin()\n>  109: \t$a = $wpdb-&gt;posts;\n   110: \t$a = $wpdb-&gt;posts; // if ( is_admin() )\n   111: \t$a = $wpdb-&gt;posts;\n   112: \t$a = $wpdb-&gt;posts; // if (is_admin())",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // debug_\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // is_admin()",
+                        "after": "\t$a = $wpdb->posts; // if ( is_admin() )\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // if (is_admin())\n\t$a = $wpdb->posts;"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 111,
+                    "snippet": "108: \t$a = $wpdb-&gt;posts; // is_admin()\n   109: \t$a = $wpdb-&gt;posts;\n   110: \t$a = $wpdb-&gt;posts; // if ( is_admin() )\n>  111: \t$a = $wpdb-&gt;posts;\n   112: \t$a = $wpdb-&gt;posts; // if (is_admin())\n   113: \t$a = $wpdb-&gt;posts;\n   114: }",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // is_admin()\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // if ( is_admin() )",
+                        "after": "\t$a = $wpdb->posts; // if (is_admin())\n\t$a = $wpdb->posts;"
+                    }
+                },
+                {
+                    "file": "/safe-strings/safe-strings.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 113,
+                    "snippet": "110: \t$a = $wpdb-&gt;posts; // if ( is_admin() )\n   111: \t$a = $wpdb-&gt;posts;\n   112: \t$a = $wpdb-&gt;posts; // if (is_admin())\n>  113: \t$a = $wpdb-&gt;posts;\n   114: }",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // if ( is_admin() )\n\t$a = $wpdb->posts;\n\t$a = $wpdb->posts; // if (is_admin())",
+                        "after": ""
+                    }
+                }
+            ]
+        }
+    }
+}

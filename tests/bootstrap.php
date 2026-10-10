@@ -11,6 +11,7 @@ global $table_prefix;
 
 require_once __DIR__ . '/support/class-identifier.php';
 require_once __DIR__ . '/support/class-fixture-plugins.php';
+require_once __DIR__ . '/support/class-expected-response.php';
 
 // The plugins folder has to exist before the config file names it and WordPress loads.
 Fixture_Plugins::create();

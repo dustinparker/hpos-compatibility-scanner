@@ -1,0 +1,418 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": false,
+        "issues": {
+            "/search-terms/search-terms.php": [
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order post type in array",
+                    "line": 12,
+                    "snippet": "9: \n    10: function hpos_fixture_search_terms() {\n    11: \t$wpdb = null;\n>   12: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; );\n    13: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order&#039;&quot;;\n    14: \t$a = &quot;post_type = &#039;shop_order&#039;&quot;;\n    15: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; );",
+                    "code": "\t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; );",
+                    "context": {
+                        "before": "defined( 'ABSPATH' ) || exit;\n\nfunction hpos_fixture_search_terms() {\n\t$wpdb = null;",
+                        "after": "\t$a = \"'post_type' = 'shop_order'\";\n\t$a = \"post_type = 'shop_order'\";\n\t$a = array( 'post_type' => 'shop_order_refund' );\n\t$a = \"'post_type' = 'shop_order_refund'\";\n\t$a = \"post_type = 'shop_order_refund'\";"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order post type in query",
+                    "line": 13,
+                    "snippet": "10: function hpos_fixture_search_terms() {\n    11: \t$wpdb = null;\n    12: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; );\n>   13: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order&#039;&quot;;\n    14: \t$a = &quot;post_type = &#039;shop_order&#039;&quot;;\n    15: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; );\n    16: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order_refund&#039;&quot;;",
+                    "code": "\t$a = &quot;&#039;post_type&#039; = &#039;shop_order&#039;&quot;;",
+                    "context": {
+                        "before": "\nfunction hpos_fixture_search_terms() {\n\t$wpdb = null;\n\t$a = array( 'post_type' => 'shop_order' );",
+                        "after": "\t$a = \"post_type = 'shop_order'\";\n\t$a = array( 'post_type' => 'shop_order_refund' );\n\t$a = \"'post_type' = 'shop_order_refund'\";\n\t$a = \"post_type = 'shop_order_refund'\";\n\t$a = $wpdb->posts;"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order post type in query string",
+                    "line": 14,
+                    "snippet": "11: \t$wpdb = null;\n    12: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; );\n    13: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order&#039;&quot;;\n>   14: \t$a = &quot;post_type = &#039;shop_order&#039;&quot;;\n    15: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; );\n    16: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order_refund&#039;&quot;;\n    17: \t$a = &quot;post_type = &#039;shop_order_refund&#039;&quot;;",
+                    "code": "\t$a = &quot;post_type = &#039;shop_order&#039;&quot;;",
+                    "context": {
+                        "before": "function hpos_fixture_search_terms() {\n\t$wpdb = null;\n\t$a = array( 'post_type' => 'shop_order' );\n\t$a = \"'post_type' = 'shop_order'\";",
+                        "after": "\t$a = array( 'post_type' => 'shop_order_refund' );\n\t$a = \"'post_type' = 'shop_order_refund'\";\n\t$a = \"post_type = 'shop_order_refund'\";\n\t$a = $wpdb->posts;\n\t$a = $wpdb->postmeta;"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order refund post type in array",
+                    "line": 15,
+                    "snippet": "12: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; );\n    13: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order&#039;&quot;;\n    14: \t$a = &quot;post_type = &#039;shop_order&#039;&quot;;\n>   15: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; );\n    16: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order_refund&#039;&quot;;\n    17: \t$a = &quot;post_type = &#039;shop_order_refund&#039;&quot;;\n    18: \t$a = $wpdb-&gt;posts;",
+                    "code": "\t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; );",
+                    "context": {
+                        "before": "\t$wpdb = null;\n\t$a = array( 'post_type' => 'shop_order' );\n\t$a = \"'post_type' = 'shop_order'\";\n\t$a = \"post_type = 'shop_order'\";",
+                        "after": "\t$a = \"'post_type' = 'shop_order_refund'\";\n\t$a = \"post_type = 'shop_order_refund'\";\n\t$a = $wpdb->posts;\n\t$a = $wpdb->postmeta;\n\t$a = 'SELECT ID FROM posts';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order refund post type in query",
+                    "line": 16,
+                    "snippet": "13: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order&#039;&quot;;\n    14: \t$a = &quot;post_type = &#039;shop_order&#039;&quot;;\n    15: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; );\n>   16: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order_refund&#039;&quot;;\n    17: \t$a = &quot;post_type = &#039;shop_order_refund&#039;&quot;;\n    18: \t$a = $wpdb-&gt;posts;\n    19: \t$a = $wpdb-&gt;postmeta;",
+                    "code": "\t$a = &quot;&#039;post_type&#039; = &#039;shop_order_refund&#039;&quot;;",
+                    "context": {
+                        "before": "\t$a = array( 'post_type' => 'shop_order' );\n\t$a = \"'post_type' = 'shop_order'\";\n\t$a = \"post_type = 'shop_order'\";\n\t$a = array( 'post_type' => 'shop_order_refund' );",
+                        "after": "\t$a = \"post_type = 'shop_order_refund'\";\n\t$a = $wpdb->posts;\n\t$a = $wpdb->postmeta;\n\t$a = 'SELECT ID FROM posts';\n\t$a = 'SELECT meta_id FROM postmeta';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order refund post type in query string",
+                    "line": 17,
+                    "snippet": "14: \t$a = &quot;post_type = &#039;shop_order&#039;&quot;;\n    15: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; );\n    16: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order_refund&#039;&quot;;\n>   17: \t$a = &quot;post_type = &#039;shop_order_refund&#039;&quot;;\n    18: \t$a = $wpdb-&gt;posts;\n    19: \t$a = $wpdb-&gt;postmeta;\n    20: \t$a = &#039;SELECT ID FROM posts&#039;;",
+                    "code": "\t$a = &quot;post_type = &#039;shop_order_refund&#039;&quot;;",
+                    "context": {
+                        "before": "\t$a = \"'post_type' = 'shop_order'\";\n\t$a = \"post_type = 'shop_order'\";\n\t$a = array( 'post_type' => 'shop_order_refund' );\n\t$a = \"'post_type' = 'shop_order_refund'\";",
+                        "after": "\t$a = $wpdb->posts;\n\t$a = $wpdb->postmeta;\n\t$a = 'SELECT ID FROM posts';\n\t$a = 'SELECT meta_id FROM postmeta';\n\t$a = 'wp_posts';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Db table",
+                    "description": "Direct reference to posts table",
+                    "line": 18,
+                    "snippet": "15: \t$a = array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; );\n    16: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order_refund&#039;&quot;;\n    17: \t$a = &quot;post_type = &#039;shop_order_refund&#039;&quot;;\n>   18: \t$a = $wpdb-&gt;posts;\n    19: \t$a = $wpdb-&gt;postmeta;\n    20: \t$a = &#039;SELECT ID FROM posts&#039;;\n    21: \t$a = &#039;SELECT meta_id FROM postmeta&#039;;",
+                    "code": "\t$a = $wpdb-&gt;posts;",
+                    "context": {
+                        "before": "\t$a = \"post_type = 'shop_order'\";\n\t$a = array( 'post_type' => 'shop_order_refund' );\n\t$a = \"'post_type' = 'shop_order_refund'\";\n\t$a = \"post_type = 'shop_order_refund'\";",
+                        "after": "\t$a = $wpdb->postmeta;\n\t$a = 'SELECT ID FROM posts';\n\t$a = 'SELECT meta_id FROM postmeta';\n\t$a = 'wp_posts';\n\t$a = 'wp_postmeta';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Db table",
+                    "description": "Direct reference to postmeta table",
+                    "line": 19,
+                    "snippet": "16: \t$a = &quot;&#039;post_type&#039; = &#039;shop_order_refund&#039;&quot;;\n    17: \t$a = &quot;post_type = &#039;shop_order_refund&#039;&quot;;\n    18: \t$a = $wpdb-&gt;posts;\n>   19: \t$a = $wpdb-&gt;postmeta;\n    20: \t$a = &#039;SELECT ID FROM posts&#039;;\n    21: \t$a = &#039;SELECT meta_id FROM postmeta&#039;;\n    22: \t$a = &#039;wp_posts&#039;;",
+                    "code": "\t$a = $wpdb-&gt;postmeta;",
+                    "context": {
+                        "before": "\t$a = array( 'post_type' => 'shop_order_refund' );\n\t$a = \"'post_type' = 'shop_order_refund'\";\n\t$a = \"post_type = 'shop_order_refund'\";\n\t$a = $wpdb->posts;",
+                        "after": "\t$a = 'SELECT ID FROM posts';\n\t$a = 'SELECT meta_id FROM postmeta';\n\t$a = 'wp_posts';\n\t$a = 'wp_postmeta';\n\t$a = get_post( $order );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Db query",
+                    "description": "SQL query referencing posts table",
+                    "line": 20,
+                    "snippet": "17: \t$a = &quot;post_type = &#039;shop_order_refund&#039;&quot;;\n    18: \t$a = $wpdb-&gt;posts;\n    19: \t$a = $wpdb-&gt;postmeta;\n>   20: \t$a = &#039;SELECT ID FROM posts&#039;;\n    21: \t$a = &#039;SELECT meta_id FROM postmeta&#039;;\n    22: \t$a = &#039;wp_posts&#039;;\n    23: \t$a = &#039;wp_postmeta&#039;;",
+                    "code": "\t$a = &#039;SELECT ID FROM posts&#039;;",
+                    "context": {
+                        "before": "\t$a = \"'post_type' = 'shop_order_refund'\";\n\t$a = \"post_type = 'shop_order_refund'\";\n\t$a = $wpdb->posts;\n\t$a = $wpdb->postmeta;",
+                        "after": "\t$a = 'SELECT meta_id FROM postmeta';\n\t$a = 'wp_posts';\n\t$a = 'wp_postmeta';\n\t$a = get_post( $order );\n\t$a = get_post_meta( $order_id, 'key' );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Db query",
+                    "description": "SQL query referencing postmeta table",
+                    "line": 21,
+                    "snippet": "18: \t$a = $wpdb-&gt;posts;\n    19: \t$a = $wpdb-&gt;postmeta;\n    20: \t$a = &#039;SELECT ID FROM posts&#039;;\n>   21: \t$a = &#039;SELECT meta_id FROM postmeta&#039;;\n    22: \t$a = &#039;wp_posts&#039;;\n    23: \t$a = &#039;wp_postmeta&#039;;\n    24: \t$a = get_post( $order );",
+                    "code": "\t$a = &#039;SELECT meta_id FROM postmeta&#039;;",
+                    "context": {
+                        "before": "\t$a = \"post_type = 'shop_order_refund'\";\n\t$a = $wpdb->posts;\n\t$a = $wpdb->postmeta;\n\t$a = 'SELECT ID FROM posts';",
+                        "after": "\t$a = 'wp_posts';\n\t$a = 'wp_postmeta';\n\t$a = get_post( $order );\n\t$a = get_post_meta( $order_id, 'key' );\n\tupdate_post_meta( $order, 'key', 'value' );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Db table",
+                    "description": "Direct wp_posts table name",
+                    "line": 22,
+                    "snippet": "19: \t$a = $wpdb-&gt;postmeta;\n    20: \t$a = &#039;SELECT ID FROM posts&#039;;\n    21: \t$a = &#039;SELECT meta_id FROM postmeta&#039;;\n>   22: \t$a = &#039;wp_posts&#039;;\n    23: \t$a = &#039;wp_postmeta&#039;;\n    24: \t$a = get_post( $order );\n    25: \t$a = get_post_meta( $order_id, &#039;key&#039; );",
+                    "code": "\t$a = &#039;wp_posts&#039;;",
+                    "context": {
+                        "before": "\t$a = $wpdb->posts;\n\t$a = $wpdb->postmeta;\n\t$a = 'SELECT ID FROM posts';\n\t$a = 'SELECT meta_id FROM postmeta';",
+                        "after": "\t$a = 'wp_postmeta';\n\t$a = get_post( $order );\n\t$a = get_post_meta( $order_id, 'key' );\n\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Db table",
+                    "description": "Direct wp_postmeta table name",
+                    "line": 23,
+                    "snippet": "20: \t$a = &#039;SELECT ID FROM posts&#039;;\n    21: \t$a = &#039;SELECT meta_id FROM postmeta&#039;;\n    22: \t$a = &#039;wp_posts&#039;;\n>   23: \t$a = &#039;wp_postmeta&#039;;\n    24: \t$a = get_post( $order );\n    25: \t$a = get_post_meta( $order_id, &#039;key&#039; );\n    26: \tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );",
+                    "code": "\t$a = &#039;wp_postmeta&#039;;",
+                    "context": {
+                        "before": "\t$a = $wpdb->postmeta;\n\t$a = 'SELECT ID FROM posts';\n\t$a = 'SELECT meta_id FROM postmeta';\n\t$a = 'wp_posts';",
+                        "after": "\t$a = get_post( $order );\n\t$a = get_post_meta( $order_id, 'key' );\n\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wp function",
+                    "description": "get_post with order variable",
+                    "line": 24,
+                    "snippet": "21: \t$a = &#039;SELECT meta_id FROM postmeta&#039;;\n    22: \t$a = &#039;wp_posts&#039;;\n    23: \t$a = &#039;wp_postmeta&#039;;\n>   24: \t$a = get_post( $order );\n    25: \t$a = get_post_meta( $order_id, &#039;key&#039; );\n    26: \tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );\n    27: \tdelete_post_meta( $order_id, &#039;key&#039; );",
+                    "code": "\t$a = get_post( $order );",
+                    "context": {
+                        "before": "\t$a = 'SELECT ID FROM posts';\n\t$a = 'SELECT meta_id FROM postmeta';\n\t$a = 'wp_posts';\n\t$a = 'wp_postmeta';",
+                        "after": "\t$a = get_post_meta( $order_id, 'key' );\n\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wp function",
+                    "description": "get_post_meta with order variable",
+                    "line": 25,
+                    "snippet": "22: \t$a = &#039;wp_posts&#039;;\n    23: \t$a = &#039;wp_postmeta&#039;;\n    24: \t$a = get_post( $order );\n>   25: \t$a = get_post_meta( $order_id, &#039;key&#039; );\n    26: \tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );\n    27: \tdelete_post_meta( $order_id, &#039;key&#039; );\n    28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );",
+                    "code": "\t$a = get_post_meta( $order_id, &#039;key&#039; );",
+                    "context": {
+                        "before": "\t$a = 'SELECT meta_id FROM postmeta';\n\t$a = 'wp_posts';\n\t$a = 'wp_postmeta';\n\t$a = get_post( $order );",
+                        "after": "\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order' ) );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wp function",
+                    "description": "update_post_meta with order variable",
+                    "line": 26,
+                    "snippet": "23: \t$a = &#039;wp_postmeta&#039;;\n    24: \t$a = get_post( $order );\n    25: \t$a = get_post_meta( $order_id, &#039;key&#039; );\n>   26: \tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );\n    27: \tdelete_post_meta( $order_id, &#039;key&#039; );\n    28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );",
+                    "code": "\tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );",
+                    "context": {
+                        "before": "\t$a = 'wp_posts';\n\t$a = 'wp_postmeta';\n\t$a = get_post( $order );\n\t$a = get_post_meta( $order_id, 'key' );",
+                        "after": "\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wp function",
+                    "description": "delete_post_meta with order variable",
+                    "line": 27,
+                    "snippet": "24: \t$a = get_post( $order );\n    25: \t$a = get_post_meta( $order_id, &#039;key&#039; );\n    26: \tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );\n>   27: \tdelete_post_meta( $order_id, &#039;key&#039; );\n    28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );",
+                    "code": "\tdelete_post_meta( $order_id, &#039;key&#039; );",
+                    "context": {
+                        "before": "\t$a = 'wp_postmeta';\n\t$a = get_post( $order );\n\t$a = get_post_meta( $order_id, 'key' );\n\tupdate_post_meta( $order, 'key', 'value' );",
+                        "after": "\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order post type in array",
+                    "line": 28,
+                    "snippet": "25: \t$a = get_post_meta( $order_id, &#039;key&#039; );\n    26: \tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );\n    27: \tdelete_post_meta( $order_id, &#039;key&#039; );\n>   28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );",
+                    "code": "\t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );",
+                    "context": {
+                        "before": "\t$a = get_post( $order );\n\t$a = get_post_meta( $order_id, 'key' );\n\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );",
+                        "after": "\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wp class",
+                    "description": "WP_Query with shop_order post type",
+                    "line": 28,
+                    "snippet": "25: \t$a = get_post_meta( $order_id, &#039;key&#039; );\n    26: \tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );\n    27: \tdelete_post_meta( $order_id, &#039;key&#039; );\n>   28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );",
+                    "code": "\t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );",
+                    "context": {
+                        "before": "\t$a = get_post( $order );\n\t$a = get_post_meta( $order_id, 'key' );\n\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );",
+                        "after": "\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order refund post type in array",
+                    "line": 29,
+                    "snippet": "26: \tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );\n    27: \tdelete_post_meta( $order_id, &#039;key&#039; );\n    28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n>   29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    32: \t$a = new WC_Order( 1 );",
+                    "code": "\t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );",
+                    "context": {
+                        "before": "\t$a = get_post_meta( $order_id, 'key' );\n\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );",
+                        "after": "\t$a = get_posts( array( 'post_type' => 'shop_order' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wp class",
+                    "description": "WP_Query with shop_order_refund post type",
+                    "line": 29,
+                    "snippet": "26: \tupdate_post_meta( $order, &#039;key&#039;, &#039;value&#039; );\n    27: \tdelete_post_meta( $order_id, &#039;key&#039; );\n    28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n>   29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    32: \t$a = new WC_Order( 1 );",
+                    "code": "\t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );",
+                    "context": {
+                        "before": "\t$a = get_post_meta( $order_id, 'key' );\n\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );",
+                        "after": "\t$a = get_posts( array( 'post_type' => 'shop_order' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order post type in array",
+                    "line": 30,
+                    "snippet": "27: \tdelete_post_meta( $order_id, &#039;key&#039; );\n    28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n>   30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    32: \t$a = new WC_Order( 1 );\n    33: \t$a = new WC_Order_Query( array() );",
+                    "code": "\t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );",
+                    "context": {
+                        "before": "\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );",
+                        "after": "\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;\n\t$a = 'woocommerce_order_data_store_cpt';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wp function",
+                    "description": "get_posts with shop_order post type",
+                    "line": 30,
+                    "snippet": "27: \tdelete_post_meta( $order_id, &#039;key&#039; );\n    28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n>   30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    32: \t$a = new WC_Order( 1 );\n    33: \t$a = new WC_Order_Query( array() );",
+                    "code": "\t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );",
+                    "context": {
+                        "before": "\tupdate_post_meta( $order, 'key', 'value' );\n\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );",
+                        "after": "\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;\n\t$a = 'woocommerce_order_data_store_cpt';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Order post type",
+                    "description": "Order refund post type in array",
+                    "line": 31,
+                    "snippet": "28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n>   31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    32: \t$a = new WC_Order( 1 );\n    33: \t$a = new WC_Order_Query( array() );\n    34: \t$a = WC()-&gt;order_factory;",
+                    "code": "\t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );",
+                    "context": {
+                        "before": "\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order' ) );",
+                        "after": "\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;\n\t$a = 'woocommerce_order_data_store_cpt';\n\t$a = 'woocommerce_order_get_items';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wp function",
+                    "description": "get_posts with shop_order_refund post type",
+                    "line": 31,
+                    "snippet": "28: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n>   31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    32: \t$a = new WC_Order( 1 );\n    33: \t$a = new WC_Order_Query( array() );\n    34: \t$a = WC()-&gt;order_factory;",
+                    "code": "\t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );",
+                    "context": {
+                        "before": "\tdelete_post_meta( $order_id, 'key' );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order' ) );",
+                        "after": "\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;\n\t$a = 'woocommerce_order_data_store_cpt';\n\t$a = 'woocommerce_order_get_items';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wc class",
+                    "description": "WC_Order instantiation",
+                    "line": 32,
+                    "snippet": "29: \t$a = new WP_Query( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n>   32: \t$a = new WC_Order( 1 );\n    33: \t$a = new WC_Order_Query( array() );\n    34: \t$a = WC()-&gt;order_factory;\n    35: \t$a = &#039;woocommerce_order_data_store_cpt&#039;;",
+                    "code": "\t$a = new WC_Order( 1 );",
+                    "context": {
+                        "before": "\t$a = new WP_Query( array( 'post_type' => 'shop_order' ) );\n\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );",
+                        "after": "\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;\n\t$a = 'woocommerce_order_data_store_cpt';\n\t$a = 'woocommerce_order_get_items';\n\t$a = 'woocommerce_before_order_object_save';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "Wc class",
+                    "description": "WC_Order_Query instantiation",
+                    "line": 33,
+                    "snippet": "30: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order&#039; ) );\n    31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    32: \t$a = new WC_Order( 1 );\n>   33: \t$a = new WC_Order_Query( array() );\n    34: \t$a = WC()-&gt;order_factory;\n    35: \t$a = &#039;woocommerce_order_data_store_cpt&#039;;\n    36: \t$a = &#039;woocommerce_order_get_items&#039;;",
+                    "code": "\t$a = new WC_Order_Query( array() );",
+                    "context": {
+                        "before": "\t$a = new WP_Query( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );",
+                        "after": "\t$a = WC()->order_factory;\n\t$a = 'woocommerce_order_data_store_cpt';\n\t$a = 'woocommerce_order_get_items';\n\t$a = 'woocommerce_before_order_object_save';\n\t$a = '/wc/v1/orders';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "WC()->order_factory",
+                    "description": "Found \"WC()->order_factory\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 34,
+                    "snippet": "31: \t$a = get_posts( array( &#039;post_type&#039; =&gt; &#039;shop_order_refund&#039; ) );\n    32: \t$a = new WC_Order( 1 );\n    33: \t$a = new WC_Order_Query( array() );\n>   34: \t$a = WC()-&gt;order_factory;\n    35: \t$a = &#039;woocommerce_order_data_store_cpt&#039;;\n    36: \t$a = &#039;woocommerce_order_get_items&#039;;\n    37: \t$a = &#039;woocommerce_before_order_object_save&#039;;",
+                    "code": "\t$a = WC()-&gt;order_factory;",
+                    "context": {
+                        "before": "\t$a = get_posts( array( 'post_type' => 'shop_order' ) );\n\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );",
+                        "after": "\t$a = 'woocommerce_order_data_store_cpt';\n\t$a = 'woocommerce_order_get_items';\n\t$a = 'woocommerce_before_order_object_save';\n\t$a = '/wc/v1/orders';\n\t$a = '/wc/v2/orders';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "woocommerce_order_data_store_cpt",
+                    "description": "Found \"woocommerce_order_data_store_cpt\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 35,
+                    "snippet": "32: \t$a = new WC_Order( 1 );\n    33: \t$a = new WC_Order_Query( array() );\n    34: \t$a = WC()-&gt;order_factory;\n>   35: \t$a = &#039;woocommerce_order_data_store_cpt&#039;;\n    36: \t$a = &#039;woocommerce_order_get_items&#039;;\n    37: \t$a = &#039;woocommerce_before_order_object_save&#039;;\n    38: \t$a = &#039;/wc/v1/orders&#039;;",
+                    "code": "\t$a = &#039;woocommerce_order_data_store_cpt&#039;;",
+                    "context": {
+                        "before": "\t$a = get_posts( array( 'post_type' => 'shop_order_refund' ) );\n\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;",
+                        "after": "\t$a = 'woocommerce_order_get_items';\n\t$a = 'woocommerce_before_order_object_save';\n\t$a = '/wc/v1/orders';\n\t$a = '/wc/v2/orders';\n\t$a = '/wc-api/v3/orders';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "woocommerce_order_get_items",
+                    "description": "Found \"woocommerce_order_get_items\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 36,
+                    "snippet": "33: \t$a = new WC_Order_Query( array() );\n    34: \t$a = WC()-&gt;order_factory;\n    35: \t$a = &#039;woocommerce_order_data_store_cpt&#039;;\n>   36: \t$a = &#039;woocommerce_order_get_items&#039;;\n    37: \t$a = &#039;woocommerce_before_order_object_save&#039;;\n    38: \t$a = &#039;/wc/v1/orders&#039;;\n    39: \t$a = &#039;/wc/v2/orders&#039;;",
+                    "code": "\t$a = &#039;woocommerce_order_get_items&#039;;",
+                    "context": {
+                        "before": "\t$a = new WC_Order( 1 );\n\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;\n\t$a = 'woocommerce_order_data_store_cpt';",
+                        "after": "\t$a = 'woocommerce_before_order_object_save';\n\t$a = '/wc/v1/orders';\n\t$a = '/wc/v2/orders';\n\t$a = '/wc-api/v3/orders';\n\t$a = 'wc-api=wc-orders';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "woocommerce_before_order_object_save",
+                    "description": "Found \"woocommerce_before_order_object_save\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 37,
+                    "snippet": "34: \t$a = WC()-&gt;order_factory;\n    35: \t$a = &#039;woocommerce_order_data_store_cpt&#039;;\n    36: \t$a = &#039;woocommerce_order_get_items&#039;;\n>   37: \t$a = &#039;woocommerce_before_order_object_save&#039;;\n    38: \t$a = &#039;/wc/v1/orders&#039;;\n    39: \t$a = &#039;/wc/v2/orders&#039;;\n    40: \t$a = &#039;/wc-api/v3/orders&#039;;",
+                    "code": "\t$a = &#039;woocommerce_before_order_object_save&#039;;",
+                    "context": {
+                        "before": "\t$a = new WC_Order_Query( array() );\n\t$a = WC()->order_factory;\n\t$a = 'woocommerce_order_data_store_cpt';\n\t$a = 'woocommerce_order_get_items';",
+                        "after": "\t$a = '/wc/v1/orders';\n\t$a = '/wc/v2/orders';\n\t$a = '/wc-api/v3/orders';\n\t$a = 'wc-api=wc-orders';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 38,
+                    "snippet": "35: \t$a = &#039;woocommerce_order_data_store_cpt&#039;;\n    36: \t$a = &#039;woocommerce_order_get_items&#039;;\n    37: \t$a = &#039;woocommerce_before_order_object_save&#039;;\n>   38: \t$a = &#039;/wc/v1/orders&#039;;\n    39: \t$a = &#039;/wc/v2/orders&#039;;\n    40: \t$a = &#039;/wc-api/v3/orders&#039;;\n    41: \t$a = &#039;wc-api=wc-orders&#039;;",
+                    "code": "\t$a = &#039;/wc/v1/orders&#039;;",
+                    "context": {
+                        "before": "\t$a = WC()->order_factory;\n\t$a = 'woocommerce_order_data_store_cpt';\n\t$a = 'woocommerce_order_get_items';\n\t$a = 'woocommerce_before_order_object_save';",
+                        "after": "\t$a = '/wc/v2/orders';\n\t$a = '/wc-api/v3/orders';\n\t$a = 'wc-api=wc-orders';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "/wc/v2/orders",
+                    "description": "Found \"/wc/v2/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 39,
+                    "snippet": "36: \t$a = &#039;woocommerce_order_get_items&#039;;\n    37: \t$a = &#039;woocommerce_before_order_object_save&#039;;\n    38: \t$a = &#039;/wc/v1/orders&#039;;\n>   39: \t$a = &#039;/wc/v2/orders&#039;;\n    40: \t$a = &#039;/wc-api/v3/orders&#039;;\n    41: \t$a = &#039;wc-api=wc-orders&#039;;\n    42: }",
+                    "code": "\t$a = &#039;/wc/v2/orders&#039;;",
+                    "context": {
+                        "before": "\t$a = 'woocommerce_order_data_store_cpt';\n\t$a = 'woocommerce_order_get_items';\n\t$a = 'woocommerce_before_order_object_save';\n\t$a = '/wc/v1/orders';",
+                        "after": "\t$a = '/wc-api/v3/orders';\n\t$a = 'wc-api=wc-orders';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "/wc-api/v3/orders",
+                    "description": "Found \"/wc-api/v3/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 40,
+                    "snippet": "37: \t$a = &#039;woocommerce_before_order_object_save&#039;;\n    38: \t$a = &#039;/wc/v1/orders&#039;;\n    39: \t$a = &#039;/wc/v2/orders&#039;;\n>   40: \t$a = &#039;/wc-api/v3/orders&#039;;\n    41: \t$a = &#039;wc-api=wc-orders&#039;;\n    42: }",
+                    "code": "\t$a = &#039;/wc-api/v3/orders&#039;;",
+                    "context": {
+                        "before": "\t$a = 'woocommerce_order_get_items';\n\t$a = 'woocommerce_before_order_object_save';\n\t$a = '/wc/v1/orders';\n\t$a = '/wc/v2/orders';",
+                        "after": "\t$a = 'wc-api=wc-orders';"
+                    }
+                },
+                {
+                    "file": "/search-terms/search-terms.php",
+                    "term": "wc-api=wc-orders",
+                    "description": "Found \"wc-api=wc-orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 41,
+                    "snippet": "38: \t$a = &#039;/wc/v1/orders&#039;;\n    39: \t$a = &#039;/wc/v2/orders&#039;;\n    40: \t$a = &#039;/wc-api/v3/orders&#039;;\n>   41: \t$a = &#039;wc-api=wc-orders&#039;;\n    42: }",
+                    "code": "\t$a = &#039;wc-api=wc-orders&#039;;",
+                    "context": {
+                        "before": "\t$a = 'woocommerce_before_order_object_save';\n\t$a = '/wc/v1/orders';\n\t$a = '/wc/v2/orders';\n\t$a = '/wc-api/v3/orders';",
+                        "after": ""
+                    }
+                }
+            ]
+        }
+    }
+}

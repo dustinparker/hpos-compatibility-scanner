@@ -1,0 +1,46 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": false,
+        "issues": {
+            "/filters/filters.php": [
+                {
+                    "file": "/filters/filters.php",
+                    "term": "hpos_fixture_plain_term",
+                    "description": "Found \"hpos_fixture_plain_term\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 12,
+                    "snippet": "9: \n    10: function hpos_fixture_filters() {\n    11: \t$wpdb = null;\n>   12: \t$a = 'hpos_fixture_plain_term';\n    13: \t$a = 'hpos_fixture_typed_pattern';\n    14: \t$a = 'hpos_fixture_untyped_pattern';\n    15: \t$a = $wpdb-&gt;posts; // hpos_fixture_safe_marker",
+                    "code": "\t$a = 'hpos_fixture_plain_term';",
+                    "context": {
+                        "before": "defined( 'ABSPATH' ) || exit;\n\nfunction hpos_fixture_filters() {\n\t$wpdb = null;",
+                        "after": "\t$a = 'hpos_fixture_typed_pattern';\n\t$a = 'hpos_fixture_untyped_pattern';\n\t$a = $wpdb->posts; // hpos_fixture_safe_marker"
+                    }
+                },
+                {
+                    "file": "/filters/filters.php",
+                    "term": "Fixture type",
+                    "description": "Typed fixture pattern",
+                    "line": 13,
+                    "snippet": "10: function hpos_fixture_filters() {\n    11: \t$wpdb = null;\n    12: \t$a = 'hpos_fixture_plain_term';\n>   13: \t$a = 'hpos_fixture_typed_pattern';\n    14: \t$a = 'hpos_fixture_untyped_pattern';\n    15: \t$a = $wpdb-&gt;posts; // hpos_fixture_safe_marker\n    16: }",
+                    "code": "\t$a = 'hpos_fixture_typed_pattern';",
+                    "context": {
+                        "before": "\nfunction hpos_fixture_filters() {\n\t$wpdb = null;\n\t$a = 'hpos_fixture_plain_term';",
+                        "after": "\t$a = 'hpos_fixture_untyped_pattern';\n\t$a = $wpdb->posts; // hpos_fixture_safe_marker"
+                    }
+                },
+                {
+                    "file": "/filters/filters.php",
+                    "term": "Pattern match",
+                    "description": "Untyped fixture pattern",
+                    "line": 14,
+                    "snippet": "11: \t$wpdb = null;\n    12: \t$a = 'hpos_fixture_plain_term';\n    13: \t$a = 'hpos_fixture_typed_pattern';\n>   14: \t$a = 'hpos_fixture_untyped_pattern';\n    15: \t$a = $wpdb-&gt;posts; // hpos_fixture_safe_marker\n    16: }",
+                    "code": "\t$a = 'hpos_fixture_untyped_pattern';",
+                    "context": {
+                        "before": "function hpos_fixture_filters() {\n\t$wpdb = null;\n\t$a = 'hpos_fixture_plain_term';\n\t$a = 'hpos_fixture_typed_pattern';",
+                        "after": "\t$a = $wpdb->posts; // hpos_fixture_safe_marker"
+                    }
+                }
+            ]
+        }
+    }
+}

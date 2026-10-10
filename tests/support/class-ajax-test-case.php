@@ -53,6 +53,25 @@ abstract class Ajax_Test_Case extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
+	 * Compare a response with its stored file, or rewrite the file in regenerate mode.
+	 *
+	 * @param string               $name     Expected file name without the extension.
+	 * @param array<string, mixed> $response Decoded response.
+	 * @return array<string, mixed> The normalized response.
+	 */
+	protected function assert_expected( string $name, array $response ): array {
+		$normalized = Expected_Response::normalize( $response );
+
+		if ( Expected_Response::updating() ) {
+			Expected_Response::save( $name, $normalized );
+		}
+
+		$this->assertSame( Expected_Response::load( $name ), $normalized );
+
+		return $normalized;
+	}
+
+	/**
 	 * Assert that nothing tried to reach the network, then reset the object cache flag.
 	 */
 	public function tear_down(): void {
