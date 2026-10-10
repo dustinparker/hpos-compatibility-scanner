@@ -197,6 +197,7 @@ final class Directory_Scanner_Test extends Ajax_Test_Case {
 			( new Directory_Scanner() )->scan( $path );
 		} catch ( Directory_Open_Exception $e ) {
 			$this->assertStringContainsString( $path, $e->getMessage() );
+			$this->assertSame( 0, $e->getCode() );
 			$this->assertInstanceOf( UnexpectedValueException::class, $e->getPrevious() );
 
 			return;
