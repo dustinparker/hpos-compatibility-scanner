@@ -1,0 +1,78 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": false,
+        "issues": {
+            "/snippet-edges/first-line.php": [
+                {
+                    "file": "/snippet-edges/first-line.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 1,
+                    "snippet": ">    1: &lt;?php $hpos_fixture = '/wc/v1/orders';\n     2: $hpos_plain_2 = 2;\n     3: $hpos_plain_3 = 3;\n     4: $hpos_plain_4 = 4;",
+                    "code": "&lt;?php $hpos_fixture = '/wc/v1/orders';",
+                    "context": {
+                        "before": "",
+                        "after": "$hpos_plain_2 = 2;\n$hpos_plain_3 = 3;\n$hpos_plain_4 = 4;\n$hpos_plain_5 = 5;\n$hpos_plain_6 = 6;"
+                    }
+                }
+            ],
+            "/snippet-edges/last-line.php": [
+                {
+                    "file": "/snippet-edges/last-line.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 10,
+                    "snippet": "7: $hpos_plain_7 = 7;\n     8: $hpos_plain_8 = 8;\n     9: $hpos_plain_9 = 9;\n>   10: $hpos_fixture = '/wc/v1/orders';",
+                    "code": "$hpos_fixture = '/wc/v1/orders';",
+                    "context": {
+                        "before": "$hpos_plain_6 = 6;\n$hpos_plain_7 = 7;\n$hpos_plain_8 = 8;\n$hpos_plain_9 = 9;",
+                        "after": ""
+                    }
+                }
+            ],
+            "/snippet-edges/second-line.php": [
+                {
+                    "file": "/snippet-edges/second-line.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 2,
+                    "snippet": "1: &lt;?php\n>    2: $hpos_fixture = '/wc/v1/orders';\n     3: $hpos_plain_3 = 3;\n     4: $hpos_plain_4 = 4;\n     5: $hpos_plain_5 = 5;",
+                    "code": "$hpos_fixture = '/wc/v1/orders';",
+                    "context": {
+                        "before": "<?php",
+                        "after": "$hpos_plain_3 = 3;\n$hpos_plain_4 = 4;\n$hpos_plain_5 = 5;\n$hpos_plain_6 = 6;\n$hpos_plain_7 = 7;"
+                    }
+                }
+            ],
+            "/snippet-edges/second-to-last-line.php": [
+                {
+                    "file": "/snippet-edges/second-to-last-line.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 10,
+                    "snippet": "7: $hpos_plain_7 = 7;\n     8: $hpos_plain_8 = 8;\n     9: $hpos_plain_9 = 9;\n>   10: $hpos_fixture = '/wc/v1/orders';\n    11: $hpos_plain_11 = 11;",
+                    "code": "$hpos_fixture = '/wc/v1/orders';",
+                    "context": {
+                        "before": "$hpos_plain_6 = 6;\n$hpos_plain_7 = 7;\n$hpos_plain_8 = 8;\n$hpos_plain_9 = 9;",
+                        "after": ""
+                    }
+                }
+            ],
+            "/snippet-edges/short.php": [
+                {
+                    "file": "/snippet-edges/short.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 2,
+                    "snippet": "1: &lt;?php\n>    2: $hpos_fixture = '/wc/v1/orders';",
+                    "code": "$hpos_fixture = '/wc/v1/orders';",
+                    "context": {
+                        "before": "<?php",
+                        "after": ""
+                    }
+                }
+            ]
+        }
+    }
+}

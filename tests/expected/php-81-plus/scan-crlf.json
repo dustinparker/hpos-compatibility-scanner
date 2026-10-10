@@ -1,0 +1,22 @@
+{
+    "success": true,
+    "data": {
+        "hpos_compatible": false,
+        "issues": {
+            "/crlf/crlf.php": [
+                {
+                    "file": "/crlf/crlf.php",
+                    "term": "/wc/v1/orders",
+                    "description": "Found \"/wc/v1/orders\" which may indicate direct database access or use of deprecated APIs.",
+                    "line": 11,
+                    "snippet": "8: defined( &#039;ABSPATH&#039; ) || exit;\n     9: \n    10: function hpos_fixture_crlf() {\n>   11: \t$a = &#039;/wc/v1/orders&#039;;\n    12: }",
+                    "code": "\t$a = &#039;/wc/v1/orders&#039;;",
+                    "context": {
+                        "before": "\ndefined( 'ABSPATH' ) || exit;\n\nfunction hpos_fixture_crlf() {",
+                        "after": ""
+                    }
+                }
+            ]
+        }
+    }
+}

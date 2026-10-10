@@ -75,4 +75,26 @@ final class Fixture_Rules_Test extends TestCase {
 
 		$this->assertGreaterThan( 0, $count );
 	}
+
+	/**
+	 * The line ending fixture keeps its CRLF endings on every line.
+	 */
+	public function test_crlf_fixture_uses_crlf_endings(): void {
+		$contents = file_get_contents( Fixture_Plugins::source() . '/crlf/crlf.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local file.
+
+		$this->assertIsString( $contents );
+		$this->assertStringContainsString( "\r\n", $contents );
+		$this->assertSame( substr_count( $contents, "\n" ), substr_count( $contents, "\r\n" ), 'A line ends without CR.' );
+	}
+
+	/**
+	 * The final newline fixture ends without a newline.
+	 */
+	public function test_no_final_newline_fixture_has_no_final_newline(): void {
+		$contents = file_get_contents( Fixture_Plugins::source() . '/no-final-newline/no-final-newline.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local file.
+
+		$this->assertIsString( $contents );
+		$this->assertNotSame( '', $contents );
+		$this->assertStringEndsNotWith( "\n", $contents );
+	}
 }
