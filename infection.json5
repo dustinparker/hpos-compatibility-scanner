@@ -22,7 +22,8 @@
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::86",
 				// Only an unreadable plugin folder reaches the message, and the permission tests cannot run inside Infection, see the Permissions note below.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::53",
-				// The seven patterns are a pre-filter for the condition below it. That condition needs "before_woocommerce_init", or both "FeaturesUtil::declare_compatibility" and "custom_order_tables", so removing any other entry changes nothing.
+				// The patterns are a pre-filter for the condition below it. That condition needs "before_woocommerce_init", or both "FeaturesUtil::declare_compatibility" and "custom_order_tables", so removing any other entry changes nothing.
+				// Infection ignores per line, so this entry also hides the removal of "before_woocommerce_init", which the suite kills.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::235",
 			],
 		},
@@ -39,7 +40,7 @@
 			],
 		},
 		// Permissions note: Infection replaces the file stream wrapper, and the replacement reports a chmod 0000 folder as missing.
-		// The three permission tests skip themselves there, so the lines only they cover are listed here and by the entries marked "unreadable".
+		// The three permission tests skip themselves there, so the lines only they cover are listed in the entries marked "unreadable".
 		CastBool: {
 			ignore: [
 				// The bool return type coerces the cached value, so the cast changes nothing.
@@ -73,13 +74,14 @@
 		Minus: {
 			ignore: [
 				// array_slice() clamps the window to the lines that exist, and a zero-length slice is empty, so an off-by-one bound gives the same context.
+				// Infection ignores per line, so the entry for line 171 also hides the Minus mutant on its trailing "- 1", which the suite kills because it adds a line to the snippet.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::159",
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::171",
 			],
 		},
 		DecrementInteger: {
 			ignore: [
-				// Same slice behaviour as Minus above.
+				// Same slice behaviour as Minus above, and the same hidden mutant on the trailing "- 1" of line 171.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::159",
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::171",
 			],
@@ -98,19 +100,17 @@
 		},
 		FalseValue: {
 			ignore: [
-				// The public check returns early for a folder that is not readable, but get_plugins() never lists such a folder.
-				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::42",
 				// The private check is only called after the handler has checked the folder, so its own guard never fires.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::231",
-				// Unreadable subfolder only: the iterator throws there, see the Permissions note below.
+				// Unreadable subfolder only: the iterator throws there, see the Permissions note above.
 				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::100",
+				// Unreadable subfolder only. Outside Infection no test can pin it either: the private check catches the exception, then the scan's own walk throws on the same folder and sends no response.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::284",
 			],
 		},
 		ReturnRemoval: {
 			ignore: [
-				// Same unreachable guards as FalseValue above.
-				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::42",
+				// Same guards as FalseValue above.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::231",
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::check_hpos_compatibility::284",
 			],
@@ -119,7 +119,7 @@
 			ignore: [
 				// A safe pattern marks every match on the line, so stopping the term loop after one changes nothing.
 				"DPWD\\HPOSCompatPlugin\\Scanner\\Scanner::scan_plugin::150",
-				// Lines 64, 96 and 254 skip an unreadable file, and whether break differs from continue depends on the order the file system lists files in, so no fixture kills them reliably.
+				// Lines 64, 96 and 254 skip an unreadable file. No test makes a file unreadable, and Infection's interceptor reports unreadable paths as missing, so these lines are not covered.
 				// Lines 70, 102 and 260 follow a successful is_readable(), so file() and file_get_contents() cannot return false there.
 				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::64",
 				"DPWD\\HPOSCompatPlugin\\Compatibility\\Compatibility::check_hpos_compatibility::70",

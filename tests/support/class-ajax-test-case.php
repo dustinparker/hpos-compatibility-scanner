@@ -56,16 +56,37 @@ abstract class Ajax_Test_Case extends WP_Ajax_UnitTestCase {
 	 * Skip a test that relies on folder permissions.
 	 *
 	 * Root reads any folder. Infection's include interceptor reports an unreadable path as missing,
-	 * so inside a mutant process the test would fail whatever the mutation is.
+	 * so inside a mutant process the test would fail whatever the mutation is. The probe below detects that.
 	 */
 	protected function skip_without_folder_permissions(): void {
 		if ( function_exists( 'posix_geteuid' ) && 0 === posix_geteuid() ) {
 			$this->markTestSkipped( 'Running as root, so folder permissions do not apply.' );
 		}
 
-		if ( class_exists( 'Infection\\StreamWrapper\\IncludeInterceptor', false ) ) {
-			$this->markTestSkipped( 'Infection reports an unreadable folder as missing.' );
+		if ( ! $this->locked_folder_is_visible() ) {
+			$this->markTestSkipped( 'This process reports an unreadable folder as missing, as Infection does.' );
 		}
+	}
+
+	/**
+	 * Whether file_exists() still sees a folder after chmod 0000.
+	 *
+	 * Probes the behaviour itself, so the skip does not depend on Infection's class names.
+	 */
+	private function locked_folder_is_visible(): bool {
+		$probe = sys_get_temp_dir() . '/hpos-scanner-probe-' . uniqid( '', true );
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir -- Test support outside WordPress.
+		if ( ! mkdir( $probe, 0755 ) ) {
+			return false;
+		}
+
+		chmod( $probe, 0000 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod -- Test support outside WordPress.
+		$visible = file_exists( $probe );
+		chmod( $probe, 0755 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod -- Test support outside WordPress.
+		rmdir( $probe ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir -- Test support outside WordPress.
+
+		return $visible;
 	}
 
 	/**

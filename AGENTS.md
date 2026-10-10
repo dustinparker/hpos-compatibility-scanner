@@ -4,7 +4,7 @@ This plugin scans other plugins for HPOS compatibility problems. The test suite 
 
 ## Installing dependencies
 
-Run `composer install` in the repository root and `composer install --working-dir=tools/infection` for Infection. The `vendor/wordpress` folder is the test copy of WordPress, so do not edit it.
+Run `composer install` in the repository root and `composer install --working-dir=tools/infection` for Infection. The `vendor/roots/wordpress-no-content` folder is the test copy of WordPress, so do not edit it.
 
 ## Starting and stopping the site
 
@@ -21,7 +21,7 @@ Run `php7.4 vendor/bin/phpunit` and `php8.2 vendor/bin/phpunit`. `composer test`
 The database connection comes from five variables, each with a fallback that matches the wp-env tests site:
 
 - `WP_TESTS_DB_NAME`, default `hpos_scanner_tests`
-- `WP_TESTS_DB_USER`, default `root`
+- `WP_TESTS_DB_USER`, default is the wp-env default
 - `WP_TESTS_DB_PASSWORD`, default is the wp-env default
 - `WP_TESTS_DB_HOST`, default `127.0.0.1`
 - `WP_TESTS_DB_PORT`, default `13507`
@@ -50,6 +50,10 @@ Run the full pass over the scanner and compatibility classes with:
 `php8.2 tools/infection/vendor/bin/infection --threads=4 --filter=src/scanner/class-scanner.php,src/compatibility/class-compatibility.php --with-uncovered --show-mutations=max --initial-tests-php-options=-dpcov.directory=src`
 
 Kill each surviving mutant with a test, or list it in `infection.json5` with the reason it cannot be killed.
+
+The entries in `infection.json5` are keyed by line number. When a change moves lines in `Scanner` or `Compatibility`, check every entry for the moved method, because an entry that no longer matches its line silently ignores whatever mutant now sits on that number.
+
+The three permission tests skip themselves when `file_exists()` reports a probe folder with mode 0000 as missing, which is what Infection's stream wrapper does. After upgrading Infection, run one full pass and check that those tests still skip inside mutant processes.
 
 ## Switching the WooCommerce version
 

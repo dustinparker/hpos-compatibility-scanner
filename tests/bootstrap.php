@@ -26,7 +26,10 @@ require_once __DIR__ . '/wp-tests-config.php';
 
 // Create the test database when it is missing.
 list( $hpos_db_host, $hpos_db_port ) = array_pad( explode( ':', DB_HOST, 2 ), 2, '3306' );
-$hpos_db_link                        = @mysqli_connect( $hpos_db_host, DB_USER, DB_PASSWORD, '', (int) $hpos_db_port ); // phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_connect, WordPress.PHP.NoSilencedErrors.Discouraged -- Runs before WordPress loads; the failure is reported below.
+
+// PHP 8.1 and later throw on a failed connection; report both versions the same way.
+mysqli_report( MYSQLI_REPORT_OFF ); // phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_report -- Runs before WordPress loads.
+$hpos_db_link = @mysqli_connect( $hpos_db_host, DB_USER, DB_PASSWORD, '', (int) $hpos_db_port ); // phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_connect, WordPress.PHP.NoSilencedErrors.Discouraged -- Runs before WordPress loads; the failure is reported below.
 
 if ( false === $hpos_db_link || ! mysqli_query( $hpos_db_link, 'CREATE DATABASE IF NOT EXISTS `' . DB_NAME . '`' ) ) { // phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_query, WordPress.DB.PreparedSQL.NotPrepared -- The name passed Identifier::check().
 	fwrite( STDERR, 'Cannot reach the test database at ' . $hpos_db_host . ':' . $hpos_db_port . '. Run "wp-env start" to provide it.' . PHP_EOL ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- CLI output before WordPress loads.
